@@ -9,9 +9,9 @@ import hr.pejic.zavrsnirad.utility.HibernateUtility;
 
 /**
  *
- * @author ...
+ * @author Pejić
  */
-public class Start {
+public class Run {
     
     public static void main(String[] args) {
         HibernateUtility.getSessionFactory().openSession();

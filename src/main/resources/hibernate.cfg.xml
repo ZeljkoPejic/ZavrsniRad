@@ -38,6 +38,11 @@
         
         <!-- Ovdje navodimo naše mapirane klase -->
          <mapping class="hr.pejic.zavrsnirad.model.Osoba" />
+         <mapping class="hr.pejic.zavrsnirad.model.Alergen"/>
+        <mapping class="hr.pejic.zavrsnirad.model.Sastojak"/>
+        <mapping class="hr.pejic.zavrsnirad.model.Recept"/>
+       
+        
         
         
     </session-factory>

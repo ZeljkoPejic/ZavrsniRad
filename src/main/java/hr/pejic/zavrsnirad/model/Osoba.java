@@ -5,35 +5,37 @@
  */
 package hr.pejic.zavrsnirad.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
- * @author ...
+ * @author Pejić
  */
-
 @Entity
-@Table(name="osoba")
-public class Osoba {
+public class Osoba extends Entitet{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-     
+    @Column(nullable = false)
     private String ime;
+    @Column(nullable = false)
     private String prezime;
     private String oib;
+    
+    @ManyToMany
+    private List<Alergen> alergen = new ArrayList<>();
 
-    public Long getId() {
-        return id;
+    public List<Alergen> getAlergen() {
+        return alergen;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAlergen(List<Alergen> alergen) {
+        this.alergen = alergen;
     }
 
     public String getIme() {
@@ -59,6 +61,6 @@ public class Osoba {
     public void setOib(String oib) {
         this.oib = oib;
     }
-     
+         
     
 }

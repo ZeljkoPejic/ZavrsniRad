@@ -5,8 +5,11 @@
  */
 package hr.pejic.zavrsnirad.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -17,7 +20,18 @@ public class Sastojak extends Entitet{
     
     @Column(nullable = false)
     private String naziv;
+    
+    @ManyToMany
+    private List<Alergen> alergeni = new ArrayList<>();
 
+    public List<Alergen> getAlergeni() {
+        return alergeni;
+    }
+
+    public void setAlergeni(List<Alergen> alergeni) {
+        this.alergeni = alergeni;
+    }
+        
     public String getNaziv() {
         return naziv;
     }

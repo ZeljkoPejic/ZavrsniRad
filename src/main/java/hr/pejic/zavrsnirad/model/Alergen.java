@@ -5,13 +5,8 @@
  */
 package hr.pejic.zavrsnirad.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,19 +18,7 @@ public class Alergen extends Entitet {
     @Column(nullable = false)
     private String naziv;
     private String opis;
-    
-    @ManyToMany
-    private List<Osoba> osoba = new ArrayList<>();
-
-    public List<Osoba> getOsoba() {
-        return osoba;
-    }
-
-    public void setOsoba(List<Osoba> osoba) {
-        this.osoba = osoba;
-    }
-       
-    
+               
     public String getNaziv() {
         return naziv;
     }

@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,14 +25,14 @@ public class Osoba extends Entitet{
     private String oib;
     
     @ManyToMany
-    private List<Alergen> alergen = new ArrayList<>();
+    private List<Alergen> alergeni = new ArrayList<>();
 
     public List<Alergen> getAlergen() {
-        return alergen;
+        return alergeni;
     }
 
     public void setAlergen(List<Alergen> alergen) {
-        this.alergen = alergen;
+        this.alergeni = alergen;
     }
 
     public String getIme() {

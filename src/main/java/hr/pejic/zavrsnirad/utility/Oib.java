@@ -11,7 +11,7 @@ package hr.pejic.zavrsnirad.utility;
  */
 public class Oib {
 
-    public static boolean checkOIB(String oib) {
+    public static boolean provjeraOib(String oib) {
 
         if (oib.length() != 11) {
             return false;

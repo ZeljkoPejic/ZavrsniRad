@@ -15,8 +15,8 @@ import org.hibernate.Session;
  */
 public abstract class Obrada<T>{
     
-    private T entitet;
-    private Session session;
+    protected T entitet;
+    protected Session session;
     
     protected abstract void kontrolaKreiraj() throws Iznimka;
     protected abstract void kontrolaAzuriraj() throws Iznimka;
@@ -27,6 +27,12 @@ public abstract class Obrada<T>{
         this.entitet = entitet;
     }
 
+    public Obrada() {
+        this.session = HibernateUtility.getSessionFactory().openSession();
+    }
+    
+    
+
     public T getEntitet() {
         return entitet;
     }
@@ -35,7 +41,42 @@ public abstract class Obrada<T>{
         this.entitet = entitet;
     }
     
+    public T kreiraj() throws Iznimka{
+        
+        kontrolaKreiraj();
+        spremiEntitet();
+        
+        return entitet;
+                
+    }
     
+    public T azuriraj() throws Iznimka{
+        
+        kontrolaAzuriraj();
+        spremiEntitet();
+        
+        return entitet;
+    }
     
+    public T obrisi() throws Iznimka{
+        
+        kontrolaObrisi();
+        obrisiEntitet();
+        
+        return entitet;
+    }
+    
+
+    private void spremiEntitet() {
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
+    }
+    
+    private void obrisiEntitet(){
+        session.beginTransaction();
+        session.delete(entitet);
+        session.getTransaction().commit();
+    } 
     
 }

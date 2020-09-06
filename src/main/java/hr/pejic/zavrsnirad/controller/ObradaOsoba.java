@@ -25,6 +25,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
     
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
+        
         checkIme();
         checkPrezime();
         checkOib();
@@ -38,6 +39,8 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
+        
+        
        
     }
     

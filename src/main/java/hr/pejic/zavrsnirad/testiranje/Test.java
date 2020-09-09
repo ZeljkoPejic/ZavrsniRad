@@ -5,7 +5,9 @@
  */
 package hr.pejic.zavrsnirad.testiranje;
 
+import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.controller.ObradaOsoba;
+import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 
@@ -18,22 +20,36 @@ public class Test {
     public static void main(String[] args) {
         
         
-        Osoba osoba = new Osoba();
+//        Osoba osoba = new Osoba();
+//        
+//        osoba.setIme("Pero");
+//        osoba.setPrezime("12345j");
+//        osoba.setOib("22222222222");
+//        
+//        ObradaOsoba oo = new ObradaOsoba();
+//        
+//        oo.setEntitet(osoba);
+//        
+//        try{
+//            oo.kreiraj();
+//        }catch(Iznimka e){
+//            System.out.println(e.getPoruka());
+//        }
+                
+        Alergen alergen = new Alergen();
         
-        osoba.setIme("Pero");
-        osoba.setPrezime("12345j");
-        osoba.setOib("22222222222");
+        alergen.setNaziv("");
+        alergen.setOpis("Nešto opisano");
         
-        ObradaOsoba oo = new ObradaOsoba();
+        ObradaAlergen oa = new ObradaAlergen();
         
-        oo.setEntitet(osoba);
+        oa.setEntitet(alergen);
         
         try{
-            oo.kreiraj();
+            oa.kreiraj();
         }catch(Iznimka e){
             System.out.println(e.getPoruka());
         }
-                
         
         
         

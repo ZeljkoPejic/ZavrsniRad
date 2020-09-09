@@ -16,10 +16,7 @@ import javax.persistence.ManyToMany;
  * @author Pejić
  */
 @Entity
-public class Sastojak extends Entitet{
-    
-    @Column(nullable = false)
-    private String naziv;
+public class Sastojak extends AttributeNaziv{
     
     @ManyToMany
     private List<Alergen> alergeni = new ArrayList<>();
@@ -31,13 +28,5 @@ public class Sastojak extends Entitet{
     public void setAlergeni(List<Alergen> alergeni) {
         this.alergeni = alergeni;
     }
-        
-    public String getNaziv() {
-        return naziv;
-    }
-
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
-        
+           
 }

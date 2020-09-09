@@ -13,20 +13,10 @@ import javax.persistence.Entity;
  * @author Pejić
  */
 @Entity
-public class Alergen extends Entitet {
-    
-    @Column(nullable = false)
-    private String naziv;
+public class Alergen extends AttributeNaziv {
+        
     private String opis;
-               
-    public String getNaziv() {
-        return naziv;
-    }
-
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
-
+                  
     public String getOpis() {
         return opis;
     }

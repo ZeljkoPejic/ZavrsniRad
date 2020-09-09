@@ -12,7 +12,7 @@ import hr.pejic.zavrsnirad.utility.Iznimka;
  *
  * @author Pejić
  */
-public class ObradaAlergen extends Obrada<Alergen> {
+public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
@@ -28,15 +28,7 @@ public class ObradaAlergen extends Obrada<Alergen> {
     protected void kontrolaObrisi() throws Iznimka {
        
     }
-    
-    // Napraviti kao jednu metodu koja se poziva na više mjesta
-    private void checkNaziv() throws Iznimka{
-        
-        if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
-            throw new Iznimka("Naziv je obavezan");
-        }
-               
-    }
+      
 
     private void checkOpis() {
        

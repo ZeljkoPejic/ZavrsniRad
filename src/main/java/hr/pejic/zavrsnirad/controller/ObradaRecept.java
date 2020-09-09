@@ -12,7 +12,7 @@ import hr.pejic.zavrsnirad.utility.Iznimka;
  *
  * @author Pejić
  */
-public class ObradaRecept extends Obrada<Recept>{
+public class ObradaRecept extends ObradaNaziv<Recept>{
 
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
@@ -27,14 +27,6 @@ public class ObradaRecept extends Obrada<Recept>{
     @Override
     protected void kontrolaObrisi() throws Iznimka {
        
-    }
-    
-    private void checkNaziv() throws Iznimka{
-        
-        if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
-            throw new Iznimka("Naziv je obavezan");
-        }
-               
     }
     
     

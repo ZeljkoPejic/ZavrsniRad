@@ -5,6 +5,7 @@
  */
 package hr.pejic.zavrsnirad.testiranje;
 
+import hr.peji.zavrsnirad.view.GlavniProzor;
 import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Alergen;
@@ -36,23 +37,23 @@ public class Test {
 //            System.out.println(e.getPoruka());
 //        }
                 
-        Alergen alergen = new Alergen();
+//        Alergen alergen = new Alergen();
+//        
+//        alergen.setNaziv("");
+//        alergen.setOpis("Nešto opisano");
+//        
+//        ObradaAlergen oa = new ObradaAlergen();
+//        
+//        oa.setEntitet(alergen);
+//        
+//        try{
+//            oa.kreiraj();
+//        }catch(Iznimka e){
+//            System.out.println(e.getPoruka());
+//        }
+//        
         
-        alergen.setNaziv("");
-        alergen.setOpis("Nešto opisano");
-        
-        ObradaAlergen oa = new ObradaAlergen();
-        
-        oa.setEntitet(alergen);
-        
-        try{
-            oa.kreiraj();
-        }catch(Iznimka e){
-            System.out.println(e.getPoruka());
-        }
-        
-        
-        
+        new GlavniProzor().setVisible(true);
         
         
         

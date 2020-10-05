@@ -6,9 +6,14 @@
 package hr.peji.zavrsnirad.view;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Image;
+import java.net.URI;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /**
  *
@@ -21,12 +26,18 @@ public class GlavniProzor extends javax.swing.JFrame {
      */
     public GlavniProzor() {
         initComponents();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/kuhanje.jpg").getImage().getScaledInstance(150, 400, Image.SCALE_DEFAULT));
+        
+       try{
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(this);
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+        setTitle("Kuharica");
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/kuhanje.jpg").getImage().getScaledInstance(200, 282, Image.SCALE_DEFAULT));
         lblSlika.setIcon(imageIcon);
-        lblSlika.getSize();
-                
-                ImageIcon slika = new ImageIcon("Slike/kuhanje.jpg");
-               // slika.
+        hyperLinks();
+        
     }
 
     /**
@@ -39,6 +50,8 @@ public class GlavniProzor extends javax.swing.JFrame {
     private void initComponents() {
 
         lblSlika = new javax.swing.JLabel();
+        lblLink1 = new javax.swing.JLabel();
+        lblLink2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mniOsoba = new javax.swing.JMenuItem();
@@ -49,8 +62,19 @@ public class GlavniProzor extends javax.swing.JFrame {
         mniIzlaz = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+
+        lblLink1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLink1MouseClicked(evt);
+            }
+        });
+
+        lblLink2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLink2MouseClicked(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -79,23 +103,66 @@ public class GlavniProzor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 239, Short.MAX_VALUE))
+                .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLink1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLink2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSlika, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLink1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblLink2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblLink1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLink1MouseClicked
+        
+        try{
+            Desktop.getDesktop().browse(new URI("https://www.healthline.com/nutrition/50-super-healthy-foods"));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(lblLink1, "Desila se greska");
+        }
+        
+    }//GEN-LAST:event_lblLink1MouseClicked
+
+    private void lblLink2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLink2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblLink2MouseClicked
+
+    private void hyperLinks(){
+        
+        lblLink1.setForeground(Color.BLUE.darker());
+        lblLink1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblLink1.setText("<html><a href=''>Eat healthy stay healthy</a></html>");
+        lblLink1.setToolTipText("50 Foods that are super healthy");
+        
+        
+        lblLink2.setForeground(Color.BLUE.darker());
+        lblLink2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblLink2.setText("<html><a href=''>Stay one step ahead</a></html>");
+        lblLink2.setToolTipText("Food Allergy, what you need to know");
+        
+        
+        
+       
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel lblLink1;
+    private javax.swing.JLabel lblLink2;
     private javax.swing.JLabel lblSlika;
     private javax.swing.JMenuItem mniAlergen;
     private javax.swing.JMenuItem mniIzlaz;

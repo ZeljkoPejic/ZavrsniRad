@@ -11,6 +11,8 @@ import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /**
  *
@@ -19,6 +21,7 @@ import hr.pejic.zavrsnirad.utility.Iznimka;
 public class Test {
     
     public static void main(String[] args) {
+        
         
         
 //        Osoba osoba = new Osoba();

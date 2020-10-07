@@ -5,8 +5,10 @@
  */
 package hr.pejic.zavrsnirad.model;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -16,6 +18,10 @@ import javax.persistence.Entity;
 public class Alergen extends AttributeNaziv {
         
     private String opis;
+    
+    @ManyToMany(mappedBy = "alergeni")
+    private List<Osoba> osobe = new ArrayList<>();
+    
                   
     public String getOpis() {
         return opis;

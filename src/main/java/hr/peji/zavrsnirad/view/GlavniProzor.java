@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Image;
+import java.io.File;
 import java.net.URI;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -26,18 +27,23 @@ public class GlavniProzor extends javax.swing.JFrame {
      */
     public GlavniProzor() {
         initComponents();
+        getContentPane().setBackground(Color.WHITE);
         
-       try{
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
-       }catch(Exception e){
-           e.printStackTrace();
-       }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setTitle("Kuharica");
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/kuhanje.jpg").getImage().getScaledInstance(200, 282, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"kuhanje.jpg").getImage().getScaledInstance(200, 282, Image.SCALE_DEFAULT));
         lblSlika.setIcon(imageIcon);
         hyperLinks();
-        
+        mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"osobe2.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        //mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"alergen.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniIzlaz.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"izlaz.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+
     }
 
     /**
@@ -79,6 +85,11 @@ public class GlavniProzor extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         mniOsoba.setText("Osobe");
+        mniOsoba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniOsobaActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniOsoba);
 
         mniAlergen.setText("Alergeni");
@@ -125,36 +136,41 @@ public class GlavniProzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLink1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLink1MouseClicked
-        
-        try{
+
+        try {
             Desktop.getDesktop().browse(new URI("https://www.healthline.com/nutrition/50-super-healthy-foods"));
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(lblLink1, "Desila se greska");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(lblLink1, "Nije moguć pristup stranici");
         }
-        
+
     }//GEN-LAST:event_lblLink1MouseClicked
 
     private void lblLink2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLink2MouseClicked
-        // TODO add your handling code here:
+        try{
+            Desktop.getDesktop().browse(new URI("https://acaai.org/allergies/types/food-allergy"));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Nije moguć pristup stranici");
+        }
     }//GEN-LAST:event_lblLink2MouseClicked
 
-    private void hyperLinks(){
+    private void mniOsobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniOsobaActionPerformed
         
+        
+        new OsobeProzor().setVisible(true);
+    }//GEN-LAST:event_mniOsobaActionPerformed
+
+    private void hyperLinks() {
+
         lblLink1.setForeground(Color.BLUE.darker());
         lblLink1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblLink1.setText("<html><a href=''>Eat healthy stay healthy</a></html>");
         lblLink1.setToolTipText("50 Foods that are super healthy");
-        
-        
+
         lblLink2.setForeground(Color.BLUE.darker());
         lblLink2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblLink2.setText("<html><a href=''>Stay one step ahead</a></html>");
         lblLink2.setToolTipText("Food Allergy, what you need to know");
-        
-        
-        
-       
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

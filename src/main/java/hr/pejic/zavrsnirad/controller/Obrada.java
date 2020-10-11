@@ -7,6 +7,7 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.utility.HibernateUtility;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.List;
 import org.hibernate.Session;
 
 /**
@@ -18,6 +19,7 @@ public abstract class Obrada<T>{
     protected T entitet;
     protected Session session;
     
+    public abstract List<T> ispis();
     protected abstract void kontrolaKreiraj() throws Iznimka;
     protected abstract void kontrolaAzuriraj() throws Iznimka;
     protected abstract void kontrolaObrisi() throws Iznimka;

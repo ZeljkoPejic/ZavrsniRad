@@ -7,6 +7,7 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,11 @@ import hr.pejic.zavrsnirad.utility.Iznimka;
  */
 public class ObradaSastojak extends ObradaNaziv<Sastojak> {
 
+    @Override
+    public List<Sastojak> ispis() {
+        return null;
+    }
+    
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
         checkNaziv();
@@ -28,5 +34,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
     protected void kontrolaObrisi() throws Iznimka {
         
     }
+
+    
            
 }

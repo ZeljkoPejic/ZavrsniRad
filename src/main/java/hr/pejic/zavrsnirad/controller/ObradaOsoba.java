@@ -8,6 +8,7 @@ package hr.pejic.zavrsnirad.controller;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.Oib;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,12 @@ import hr.pejic.zavrsnirad.utility.Oib;
  */
 public class ObradaOsoba extends Obrada<Osoba> {
 
+     @Override
+    public List<Osoba> ispis() {
+        return session.createQuery("from Osoba").list();
+    }
+    
+    
     public ObradaOsoba(Osoba osoba){
         super(osoba);
     }
@@ -73,7 +80,8 @@ public class ObradaOsoba extends Obrada<Osoba> {
         }
                         
     }
-    
+
+   
         
         
     

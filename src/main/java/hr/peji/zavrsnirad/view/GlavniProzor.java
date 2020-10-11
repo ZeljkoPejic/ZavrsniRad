@@ -156,7 +156,7 @@ public class GlavniProzor extends javax.swing.JFrame {
     private void mniOsobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniOsobaActionPerformed
         
         
-        new OsobeProzor().setVisible(true);
+        new OsobaProzor().setVisible(true);
     }//GEN-LAST:event_mniOsobaActionPerformed
 
     private void hyperLinks() {

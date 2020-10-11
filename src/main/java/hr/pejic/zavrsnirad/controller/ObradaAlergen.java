@@ -7,6 +7,7 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,11 @@ import hr.pejic.zavrsnirad.utility.Iznimka;
  */
 public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
+    @Override
+    public List<Alergen> ispis() {
+        return null;
+    }
+    
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
        checkNaziv();
@@ -33,6 +39,8 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
     private void checkOpis() {
        
     }
+
+    
     
     
     

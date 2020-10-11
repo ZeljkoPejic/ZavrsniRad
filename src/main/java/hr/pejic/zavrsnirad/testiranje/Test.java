@@ -10,6 +10,7 @@ import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
+import hr.pejic.zavrsnirad.utility.HibernateUtility;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -26,9 +27,9 @@ public class Test {
         
 //        Osoba osoba = new Osoba();
 //        
-//        osoba.setIme("Pero");
-//        osoba.setPrezime("12345j");
-//        osoba.setOib("22222222222");
+//        osoba.setIme("Ivano");
+//        osoba.setPrezime("Nogalo");
+//        osoba.setOib("59249578608");
 //        
 //        ObradaOsoba oo = new ObradaOsoba();
 //        
@@ -39,7 +40,7 @@ public class Test {
 //        }catch(Iznimka e){
 //            System.out.println(e.getPoruka());
 //        }
-                
+//                
 //        Alergen alergen = new Alergen();
 //        
 //        alergen.setNaziv("");
@@ -58,7 +59,7 @@ public class Test {
         
         new GlavniProzor().setVisible(true);
         
-        
+        //HibernateUtility.getSessionFactory().openSession();
         
         
     }

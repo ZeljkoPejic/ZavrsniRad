@@ -24,6 +24,19 @@ public class Test {
     public static void main(String[] args) {
         
         
+//        Alergen a = new Alergen();
+//        ObradaAlergen oa = new ObradaAlergen();
+//        
+//        a.setNaziv("Kokalo");
+//        a.setOpis("Nogalo");
+//        oa.setEntitet(a);
+//        
+//        try{
+//            oa.kreiraj();
+//        }catch(Iznimka e){
+//            System.out.println(e.getPoruka());
+//        }
+        
         
 //        Osoba osoba = new Osoba();
 //        

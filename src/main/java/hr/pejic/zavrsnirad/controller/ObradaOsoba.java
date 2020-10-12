@@ -21,6 +21,11 @@ public class ObradaOsoba extends Obrada<Osoba> {
         return session.createQuery("from Osoba").list();
     }
     
+    public List<Osoba> ispis(String trazi){
+        return session.createQuery("from Osoba o where concat(o.ime, ' ', o.prezime, ' ', o.oib) "
+              + " like :trazi ").setParameter("trazi", "%"+trazi+"%").list();
+    }
+    
     
     public ObradaOsoba(Osoba osoba){
         super(osoba);

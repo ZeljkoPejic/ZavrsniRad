@@ -17,7 +17,11 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
     @Override
     public List<Alergen> ispis() {
-        return null;
+        return session.createQuery("from Alergen").list();
+    }
+    
+    public List<Alergen> ispis(String trazi){
+        return session.createQuery("select a.naziv from Alergen a where a.naziv=:trazi").setParameter("trazi", "%"+trazi+"%").list();
     }
     
     @Override

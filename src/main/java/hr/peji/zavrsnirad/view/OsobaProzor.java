@@ -10,7 +10,10 @@ import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.awt.Image;
+import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -27,8 +30,10 @@ public class OsobaProzor extends javax.swing.JFrame {
     public OsobaProzor() {
         initComponents();
         oo = new ObradaOsoba();
-        ucitajPodatke();
-
+        ucitajOsobe();
+        lblIkona.setText("\ud83d\udd0d");
+        setTitle(Osoba.class.getSimpleName());
+        setIconImage(new ImageIcon("Slike"+File.separator+"osobe2.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
 
     /**
@@ -55,8 +60,10 @@ public class OsobaProzor extends javax.swing.JFrame {
         lstAlergen = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstOsoba = new javax.swing.JList<>();
+        txtTraziOsobu = new javax.swing.JTextField();
+        lblIkona = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Podaci"));
@@ -149,6 +156,14 @@ public class OsobaProzor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lstOsoba);
 
+        txtTraziOsobu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTraziOsobuKeyReleased(evt);
+            }
+        });
+
+        lblIkona.setText("Icon");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,8 +172,13 @@ public class OsobaProzor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblIkona)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTraziOsobu, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))
+                .addGap(154, 154, 154)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -167,9 +187,15 @@ public class OsobaProzor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTraziOsobu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIkona))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -179,7 +205,6 @@ public class OsobaProzor extends javax.swing.JFrame {
 
     private void lstOsobaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstOsobaValueChanged
 
-        
         if (evt.getValueIsAdjusting()) {
             return;
         }
@@ -196,40 +221,50 @@ public class OsobaProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_lstOsobaValueChanged
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
-        
+
         new OsobaKreirajProzor().setVisible(true);
-        
+
     }//GEN-LAST:event_btnKreirajActionPerformed
 
     private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
-        
+
         osoba = lstOsoba.getSelectedValue();
-        
+
         osoba.setIme(txtIme.getText());
         osoba.setPrezime(txtPrezime.getText());
         osoba.setOib(txtOib.getText());
         oo.setEntitet(osoba);
-        
-        try{
+
+        try {
             oo.azuriraj();
             lblIznimka.setText("Uspješna izmjena osobe");
             BrisanjePoruke bp = new BrisanjePoruke(lblIznimka);
             bp.start();
-        }catch(Iznimka ex){
+        } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
-        
+
     }//GEN-LAST:event_btnIzmjenaActionPerformed
 
-    private void ucitajPodatke() {
+    private void txtTraziOsobuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziOsobuKeyReleased
+        traziOsobe();
+    }//GEN-LAST:event_txtTraziOsobuKeyReleased
 
-        
+    private void ucitajOsobe() {
+
         DefaultListModel<Osoba> m = new DefaultListModel<>();
 
         oo.ispis().forEach(s -> m.addElement(s));
 
         lstOsoba.setModel(m);
 
+    }
+
+    private void traziOsobe() {
+        DefaultListModel<Osoba> m = new DefaultListModel<>();
+
+        oo.ispis(txtTraziOsobu.getText()).forEach(s -> m.addElement(s));
+        lstOsoba.setModel(m);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -242,11 +277,13 @@ public class OsobaProzor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblIkona;
     private javax.swing.JLabel lblIznimka;
     private javax.swing.JList<Alergen> lstAlergen;
     private javax.swing.JList<Osoba> lstOsoba;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtOib;
     private javax.swing.JTextField txtPrezime;
+    private javax.swing.JTextField txtTraziOsobu;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,6 +30,13 @@ public class Alergen extends AttributeNaziv {
     public void setOpis(String opis) {
         this.opis = opis;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+    
         
     
 }

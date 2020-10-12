@@ -46,6 +46,7 @@ public class OsobaKreirajProzor extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Ime");
 
@@ -129,6 +130,7 @@ public class OsobaKreirajProzor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKreirajActionPerformed

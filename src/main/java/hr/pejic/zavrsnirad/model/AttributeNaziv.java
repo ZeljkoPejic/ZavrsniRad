@@ -16,7 +16,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class AttributeNaziv extends Entitet{
     
     @Column(nullable = false)
-    private String naziv;
+    protected String naziv;
 
     public String getNaziv() {
         return naziv;

@@ -36,7 +36,7 @@ public class GlavniProzor extends javax.swing.JFrame {
             e.printStackTrace();
         }
         setTitle("Kuharica");
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"kuhanje.jpg").getImage().getScaledInstance(200, 282, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"kuhanje.jpg").getImage().getScaledInstance(220, 282, Image.SCALE_DEFAULT));
         lblSlika.setIcon(imageIcon);
         hyperLinks();
         mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"osobe2.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
@@ -93,6 +93,11 @@ public class GlavniProzor extends javax.swing.JFrame {
         jMenu1.add(mniOsoba);
 
         mniAlergen.setText("Alergeni");
+        mniAlergen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAlergenActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniAlergen);
 
         mniSastojak.setText("Sastojci");
@@ -114,12 +119,12 @@ public class GlavniProzor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLink1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLink2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(lblLink2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLink1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,6 +163,10 @@ public class GlavniProzor extends javax.swing.JFrame {
         
         new OsobaProzor().setVisible(true);
     }//GEN-LAST:event_mniOsobaActionPerformed
+
+    private void mniAlergenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAlergenActionPerformed
+        new AlergenProzor().setVisible(true);
+    }//GEN-LAST:event_mniAlergenActionPerformed
 
     private void hyperLinks() {
 

@@ -7,6 +7,8 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.AttributeNaziv;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,8 +34,15 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
     
     protected void checkNaziv() throws Iznimka{
         
+        //?????
+        List<?> lista = session.createQuery("from T t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+        
+               
         if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
             throw new Iznimka("Naziv je obavezan");
+        }
+        if(lista.size() > 0){
+            throw new Iznimka("T pod tim nazivom vec postoji");
         }
                
     }

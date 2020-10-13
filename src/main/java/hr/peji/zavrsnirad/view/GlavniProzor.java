@@ -39,11 +39,11 @@ public class GlavniProzor extends javax.swing.JFrame {
         ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"kuhanje.jpg").getImage().getScaledInstance(220, 282, Image.SCALE_DEFAULT));
         lblSlika.setIcon(imageIcon);
         hyperLinks();
-        mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"osobe2.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        //mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"alergen.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"osobe.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
         mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
         mniIzlaz.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"izlaz.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-
+        mniSastojak.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"sastojci.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
     }
 
     /**

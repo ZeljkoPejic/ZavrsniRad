@@ -21,7 +21,8 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
     }
     
     public List<Alergen> ispis(String trazi){
-        return session.createQuery("select a.naziv from Alergen a where a.naziv=:trazi").setParameter("trazi", "%"+trazi+"%").list();
+        return session.createQuery("from Alergen a where a.naziv=:trazi").setParameter("trazi", "%"+trazi+"%").list();
+        
     }
     
     @Override
@@ -41,7 +42,9 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
       
 
     private void checkOpis() {
-       
+       if(entitet.getOpis()==null || entitet.getOpis().trim().isEmpty()){
+           entitet.setOpis("Nema opisa");
+       }
     }
 
     

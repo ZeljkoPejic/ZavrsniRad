@@ -9,6 +9,8 @@ import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -149,8 +151,8 @@ public class OsobaKreirajProzor extends javax.swing.JFrame {
             txtPrezime.setText("");
             txtOib.setText("");
             lblIznimka.setText("Osoba je uspješno kreirana");
-            BrisanjePoruke bp = new BrisanjePoruke(lblIznimka);
-            bp.start();
+            new BrisanjePoruke(lblIznimka).start();
+
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }

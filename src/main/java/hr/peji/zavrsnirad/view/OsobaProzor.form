@@ -176,6 +176,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Brisanje"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrisanjeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblIznimka">
           <Properties>

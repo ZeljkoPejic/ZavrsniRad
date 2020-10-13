@@ -23,6 +23,7 @@ public class OsobaProzor extends javax.swing.JFrame {
 
     private Osoba osoba;
     private ObradaOsoba oo;
+    private DefaultListModel<Osoba> m;
 
     /**
      * Creates new form OsobeProzor
@@ -33,7 +34,7 @@ public class OsobaProzor extends javax.swing.JFrame {
         ucitajOsobe();
         lblIkona.setText("\ud83d\udd0d");
         setTitle(Osoba.class.getSimpleName());
-        setIconImage(new ImageIcon("Slike"+File.separator+"osobe2.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
+        setIconImage(new ImageIcon("Slike" + File.separator + "osobe.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
 
     /**
@@ -89,6 +90,11 @@ public class OsobaProzor extends javax.swing.JFrame {
         });
 
         btnBrisanje.setText("Brisanje");
+        btnBrisanje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrisanjeActionPerformed(evt);
+            }
+        });
 
         lblIznimka.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
@@ -238,8 +244,8 @@ public class OsobaProzor extends javax.swing.JFrame {
         try {
             oo.azuriraj();
             lblIznimka.setText("Uspješna izmjena osobe");
-            BrisanjePoruke bp = new BrisanjePoruke(lblIznimka);
-            bp.start();
+            new BrisanjePoruke(lblIznimka).start();
+
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
@@ -250,9 +256,23 @@ public class OsobaProzor extends javax.swing.JFrame {
         traziOsobe();
     }//GEN-LAST:event_txtTraziOsobuKeyReleased
 
-    private void ucitajOsobe() {
+    private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
 
-        DefaultListModel<Osoba> m = new DefaultListModel<>();
+        osoba = lstOsoba.getSelectedValue();
+        oo.setEntitet(osoba);
+
+        try {
+            oo.obrisi();
+            lblIznimka.setText("Osoba uspješno obrisana");
+            new BrisanjePoruke(lblIznimka).start();
+        } catch (Iznimka ex) {
+            lblIznimka.setText(ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnBrisanjeActionPerformed
+
+    public void ucitajOsobe() {
+
+        m = new DefaultListModel<>();
 
         oo.ispis().forEach(s -> m.addElement(s));
 
@@ -261,7 +281,7 @@ public class OsobaProzor extends javax.swing.JFrame {
     }
 
     private void traziOsobe() {
-        DefaultListModel<Osoba> m = new DefaultListModel<>();
+        m = new DefaultListModel<>();
 
         oo.ispis(txtTraziOsobu.getText()).forEach(s -> m.addElement(s));
         lstOsoba.setModel(m);

@@ -279,14 +279,14 @@ public class AlergenProzor extends javax.swing.JFrame {
     }
 
     private void ocitiPolja() {
-        Component[] com = getComponents();
+        Component[] com = getRootPane().getComponents();
         JTextField jtf = new JTextField();
         
-//        for (Component a : c) {
-//            if (a.getClass().isInstance(jtf)) {
-//                ((JTextField)a).setText("");
-//            }
-//        }
+        for (Component a : com) {
+            if (a.getClass().isInstance(jtf)) {
+                ((JTextField)a).setText("");
+            }
+        }
 
 //for (int i = 0; i < com.length; i++) {
 //

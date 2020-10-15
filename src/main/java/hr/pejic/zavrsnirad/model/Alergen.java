@@ -35,6 +35,14 @@ public class Alergen extends AttributeNaziv {
     public String toString() {
         return naziv;
     }
+
+    public List<Osoba> getOsobe() {
+        return osobe;
+    }
+
+    public void setOsobe(List<Osoba> osobe) {
+        this.osobe = osobe;
+    }
     
     
         

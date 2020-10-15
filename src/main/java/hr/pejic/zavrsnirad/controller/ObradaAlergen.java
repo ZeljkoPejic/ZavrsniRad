@@ -21,7 +21,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
     }
     
     public List<Alergen> ispis(String trazi){
-        return session.createQuery("from Alergen a where a.naziv=:trazi").setParameter("trazi", "%"+trazi+"%").list();
+        return session.createQuery("from Alergen a where a.naziv like :trazi").setParameter("trazi", "%"+trazi+"%").list();
         
     }
     
@@ -33,6 +33,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
+        
     }
 
     @Override
@@ -47,7 +48,14 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
        }
     }
 
-    
+     protected void checkNaziv()throws Iznimka{
+        super.checkNaziv();
+        List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+        if(lista.size() > 0){
+            throw new Iznimka("Alergen pod tim nazivom vec postoji");
+        }
+    }
+   
     
     
     

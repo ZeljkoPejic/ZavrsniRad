@@ -27,13 +27,14 @@ public class Osoba extends Entitet{
     @ManyToMany
     private List<Alergen> alergeni = new ArrayList<>();
 
-    public List<Alergen> getAlergen() {
+    public List<Alergen> getAlergeni() {
         return alergeni;
     }
 
-    public void setAlergen(List<Alergen> alergen) {
-        this.alergeni = alergen;
+    public void setAlergeni(List<Alergen> alergeni) {
+        this.alergeni = alergeni;
     }
+    
 
     public String getIme() {
         return ime;

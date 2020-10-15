@@ -59,7 +59,7 @@ public abstract class Obrada<T>{
         
         return entitet;
     }
-    
+            
     public T obrisi() throws Iznimka{
         
         kontrolaObrisi();

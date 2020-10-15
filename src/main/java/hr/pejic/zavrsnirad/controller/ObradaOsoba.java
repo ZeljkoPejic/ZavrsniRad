@@ -46,12 +46,21 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-        checkAlergen();
+        checkOibIzmjena();
+        
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
 
+    }
+    
+    public void azurirajAlergenOsobe() throws Iznimka{
+        
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
+        
     }
 
     private void checkIme() throws Iznimka {
@@ -81,7 +90,20 @@ public class ObradaOsoba extends Obrada<Osoba> {
         } else if (!Oib.provjeraOib(entitet.getOib())) {
             throw new Iznimka("Neispravan unos OIB-a");
         }
-
+        checkOibIzmjena();
+        
+        
+    }
+    
+    private void checkOibIzmjena() throws Iznimka{
+        
+        List<String> osobeOib = session.createQuery("select o.oib from Osoba o").list();
+        
+        for(String o : osobeOib){
+            if(entitet.getOib().equals(o)){
+                throw new Iznimka("Osoba pod tim OIB-om već postoji");
+            }
+        }
     }
 
     private void checkAlergen() throws Iznimka {

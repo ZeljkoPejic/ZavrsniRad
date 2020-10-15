@@ -30,7 +30,7 @@ public class OsobaProzor extends javax.swing.JFrame {
     private Osoba osoba;
     private ObradaOsoba oo;
     private ObradaAlergen oa;
-    private DefaultListModel<Osoba> m;
+    //private DefaultListModel<Osoba> m;
 
     /**
      * Creates new form OsobeProzor
@@ -138,7 +138,7 @@ public class OsobaProzor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBrisanje))
                             .addComponent(btnKreiraj))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 5, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,7 +246,7 @@ public class OsobaProzor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRemove)
                             .addComponent(btnAdd))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -299,12 +299,12 @@ public class OsobaProzor extends javax.swing.JFrame {
         txtIme.setText(osoba.getIme());
         txtPrezime.setText(osoba.getPrezime());
         txtOib.setText(osoba.getOib());
-        
+
         DefaultListModel<Alergen> m = new DefaultListModel<>();
-        for(Alergen a : osoba.getAlergeni()){
+        for (Alergen a : osoba.getAlergeni()) {
             m.addElement(a);
         }
-        
+
         lstAlergeniOsobe.setModel(m);
 
     }//GEN-LAST:event_lstOsobaValueChanged
@@ -317,6 +317,7 @@ public class OsobaProzor extends javax.swing.JFrame {
 
     private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
 
+        
         osoba = lstOsoba.getSelectedValue();
 
         osoba.setIme(txtIme.getText());
@@ -326,9 +327,9 @@ public class OsobaProzor extends javax.swing.JFrame {
 
         try {
             oo.azuriraj();
+            ucitajOsobe();
             lblIznimka.setText("Uspješna izmjena osobe");
-           // new BrisanjePoruke(lblIznimka).start();
-
+            new BrisanjePoruke(lblIznimka).start();
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
@@ -347,7 +348,8 @@ public class OsobaProzor extends javax.swing.JFrame {
         try {
             oo.obrisi();
             lblIznimka.setText("Osoba uspješno obrisana");
-           // new BrisanjePoruke(lblIznimka).start();
+            new BrisanjePoruke(lblIznimka).start();
+            ucitajOsobe();
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
@@ -368,46 +370,55 @@ public class OsobaProzor extends javax.swing.JFrame {
         osoba = lstOsoba.getSelectedValue();
 
         if (osoba == null) {
+            lblPorukaZaAlergene.setText("Molimo odaberite osobu");
             return;
         }
         List<Alergen> alergeni = lstAlergen.getSelectedValuesList();
-        if (alergeni == null) {
+        if (alergeni == null || alergeni.isEmpty()) {
+            lblPorukaZaAlergene.setText("Molimo odaberite alergen");
             return;
         }
-
-        //osoba.getAlergeni().add(alergen);
+        boolean promjena = false;       
         DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
-        for(Alergen a : alergeni){
-                
-            for(int i=0;i<m.size();i++){
-                
-                
-                
+
+        nastavi:
+        for (Alergen a : alergeni) {
+
+            for (int i = 0; i < m.size(); i++) {
+
+                if (a.getId().equals(m.get(i).getId())) {
+                    //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
+                    lblPorukaZaAlergene.setText("Odabrani alergen/i je/su već dodijeljen/i");
+                    new BrisanjePoruke(lblPorukaZaAlergene).start();
+                    continue nastavi;
+                }
+
             }
-            
-            if(m.){
-                //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
-                lblPorukaZaAlergene.setText("Odabrani alergen/i je/su već dodijeljen/i");
-                new BrisanjePoruke(lblPorukaZaAlergene).start();
+
+            if (m.isEmpty()) {
+                m.addElement(a);
+                osoba.getAlergeni().add(a);
+                promjena = true;
                 continue;
             }
+            
             m.addElement(a);
-            //osoba.getAlergeni().add(a);
-        }   
-                
-//        for (int i = 0; i < m.size(); i++) {
-//            osoba.getAlergeni().add(m.getElementAt(i));
-//        }
+            osoba.getAlergeni().add(a);
+            promjena = true;
 
-//        oo.setEntitet(osoba);
-//        try{
-//            oo.azuriraj();
-//            lblPorukaZaAlergene.setText("Osobi je uspješno dodijeljen alergen");
-//            //new BrisanjePoruke(lblPorukaZaAlergene).start();
-//        }catch(Iznimka ex){
-//            lblPorukaZaAlergene.setText(ex.getPoruka());
-//        }
-//           
+        }
+
+        if (promjena) {
+            oo.setEntitet(osoba);
+            try {
+                oo.azurirajAlergenOsobe();
+                lblPorukaZaAlergene.setText("Osobi je uspješno dodijeljen alergen");
+                new BrisanjePoruke(lblPorukaZaAlergene).start();
+            } catch (Iznimka ex) {
+                lblPorukaZaAlergene.setText(ex.getPoruka());
+            }
+        }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -435,24 +446,24 @@ public class OsobaProzor extends javax.swing.JFrame {
             }
 
         }
-        
+
         for (int i = 0; i < m.size(); i++) {
             osoba.getAlergeni().remove(m.getElementAt(i));
         }
         oo.setEntitet(osoba);
-        try{
+        try {
             oo.azuriraj(); // u kontroli napraviti provjeru jel vec postoje ti alergeni pod tom osobom
             lblPorukaZaAlergene.setText("Osobi je uspješno obrisan alergen");
-        }catch(Iznimka ex){
-            
+        } catch (Iznimka ex) {
+
         }
-        
+
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     public void ucitajOsobe() {
 
-        m = new DefaultListModel<>();
+        DefaultListModel<Osoba> m = new DefaultListModel<>();
 
         oo.ispis().forEach(s -> m.addElement(s));
 
@@ -461,7 +472,7 @@ public class OsobaProzor extends javax.swing.JFrame {
     }
 
     private void traziOsobe() {
-        m = new DefaultListModel<>();
+        DefaultListModel<Osoba> m = new DefaultListModel<>();
 
         oo.ispis(txtTraziOsobu.getText()).forEach(s -> m.addElement(s));
         lstOsoba.setModel(m);

@@ -17,21 +17,31 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
 
     @Override
     public List<Sastojak> ispis() {
-        return null;
+        return session.createQuery("from Sastojak").list();
     }
     
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
-        checkNaziv();
+        super.checkNaziv();
+        checkNazivKreiraj();
     }
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-       
+       super.checkNaziv();
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
+        
+    }
+    
+    private void checkNazivKreiraj()throws Iznimka{
+        
+        List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+        if(!(listaNaziva.isEmpty())){
+            throw new Iznimka("Sastojak već postoji");
+        }
         
     }
 

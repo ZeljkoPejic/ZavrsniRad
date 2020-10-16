@@ -101,6 +101,11 @@ public class GlavniProzor extends javax.swing.JFrame {
         jMenu1.add(mniAlergen);
 
         mniSastojak.setText("Sastojci");
+        mniSastojak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSastojakActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniSastojak);
 
         mniRecept.setText("Recepti");
@@ -167,6 +172,10 @@ public class GlavniProzor extends javax.swing.JFrame {
     private void mniAlergenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAlergenActionPerformed
         new AlergenProzor().setVisible(true);
     }//GEN-LAST:event_mniAlergenActionPerformed
+
+    private void mniSastojakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSastojakActionPerformed
+        new SastojakProzor().setVisible(true);
+    }//GEN-LAST:event_mniSastojakActionPerformed
 
     private void hyperLinks() {
 

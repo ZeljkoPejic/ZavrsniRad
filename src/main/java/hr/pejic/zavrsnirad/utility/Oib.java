@@ -5,6 +5,11 @@
  */
 package hr.pejic.zavrsnirad.utility;
 
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Pejić
@@ -38,6 +43,17 @@ public class Oib {
             kontrolni = 0;
         }
         return kontrolni == Integer.parseInt(oib.substring(10));
+    }
+
+    public static void ocistiPolja(Container container) {
+
+        Component[] com = container.getComponents();
+        for (Component a : com) {
+            if (a.getClass().isInstance(new JTextField())) {
+                ((JTextField) a).setText("");
+            }
+        }
+
     }
 
 }

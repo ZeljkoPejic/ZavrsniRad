@@ -18,12 +18,12 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
 
     @Override
     protected void kontrolaKreiraj() throws Iznimka{
-        checkNaziv();
+        //checkNaziv();
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka{
-        
+        //checkNaziv();
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
     
     protected void checkNaziv() throws Iznimka{
                      
-        if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
+        if(entitet.getNaziv()==null || entitet.getNaziv().trim().isEmpty()){
             throw new Iznimka("Naziv je obavezan");
         }
         

@@ -9,8 +9,6 @@ import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

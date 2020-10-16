@@ -9,13 +9,16 @@ import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import hr.pejic.zavrsnirad.utility.Oib;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -193,7 +196,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         if (alergen == null) {
             return;
         }
-        ocistiPolja();
+        Oib.ocistiPolja(getContentPane());
         if (alergen.getNaziv().length() > 10) {
             txtNaziv.setText(alergen.getNaziv());
         } else {
@@ -216,7 +219,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         try {
             oa.kreiraj();
             ucitajAlergene();
-            ocistiPolja();
+            Oib.ocistiPolja(getContentPane());
             lblIznimka.setText("Alergen je uspješno kreiran");            
             new BrisanjePoruke(lblIznimka).start();
 
@@ -243,7 +246,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             oa.obrisi();
             lblIznimka.setText("Alergen uspješno obrisan");
             ucitajAlergene();
-            ocistiPolja();
+            Oib.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
@@ -290,30 +293,6 @@ public class AlergenProzor extends javax.swing.JFrame {
         oa.ispis(txtTrazi.getText()).forEach(a -> m.addElement(a));
 
         lstAlergeni.setModel(m);
-
-    }
-
-    private void ocistiPolja() {
-        Component[] com = getRootPane().getComponents();
-        JTextField jtf = new JTextField();
-
-        for (Component a : com) {
-            if (a.getClass().isInstance(jtf)) {
-                ((JTextField) a).setText("");
-            }
-        }
-
-//for (int i = 0; i < com.length; i++) {
-//
-//            if (com[i].getClass().isInstance(jtf)) {
-//                ((JTextField) com[i]).setText("");
-//
-//            }
-//
-//        }
-        txtNaziv.setText("");
-        txtOpis.setText("");
-        lblNaziv.setText("");
 
     }
 

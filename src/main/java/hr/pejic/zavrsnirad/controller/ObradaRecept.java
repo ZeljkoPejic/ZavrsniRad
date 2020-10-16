@@ -35,13 +35,7 @@ public class ObradaRecept extends ObradaNaziv<Recept>{
        
     }
 
-    protected void checkNaziv()throws Iznimka{
-        super.checkNaziv();
-        List<Recept> lista = session.createQuery("from Recept t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-        if(lista.size() > 0){
-            throw new Iznimka("Recept pod tim nazivom vec postoji");
-        }
-    }
+    
     
     
 }

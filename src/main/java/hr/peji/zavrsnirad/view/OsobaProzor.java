@@ -297,7 +297,7 @@ public class OsobaProzor extends javax.swing.JFrame {
         txtOib.setText(osoba.getOib());
 
         DefaultListModel<Alergen> m = new DefaultListModel<>();
-        for (Alergen a : osoba.getAlergeni()) {
+        for (Alergen a : osoba.getAlergeniOsobe()) {
             m.addElement(a);
         }
 
@@ -314,6 +314,10 @@ public class OsobaProzor extends javax.swing.JFrame {
     private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
 
         osoba = lstOsoba.getSelectedValue();
+        if(osoba == null){
+            lblIznimka.setText("Odaberite osobu za izmjenu");
+            return;
+        }
 
         osoba.setIme(txtIme.getText());
         osoba.setPrezime(txtPrezime.getText());
@@ -338,6 +342,10 @@ public class OsobaProzor extends javax.swing.JFrame {
     private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
 
         osoba = lstOsoba.getSelectedValue();
+        if(osoba == null){
+            lblIznimka.setText("Odaberite osobu za brisanje");
+            return;
+        }
         oo.setEntitet(osoba);
 
         try {
@@ -390,12 +398,12 @@ public class OsobaProzor extends javax.swing.JFrame {
             }
             if (m.isEmpty()) {
                 m.addElement(a);
-                osoba.getAlergeni().add(a);
+                osoba.getAlergeniOsobe().add(a);
                 promjena = true;
                 continue;
             }
             m.addElement(a);
-            osoba.getAlergeni().add(a);
+            osoba.getAlergeniOsobe().add(a);
             promjena = true;
 
         }
@@ -434,7 +442,7 @@ public class OsobaProzor extends javax.swing.JFrame {
             for (int j = 0; j < m.size(); j++) {
 
                 if (selektiraniAlergeni.get(i).equals(m.getElementAt(j))) {
-                    osoba.getAlergeni().remove(m.getElementAt(j));
+                    osoba.getAlergeniOsobe().remove(m.getElementAt(j));
                     m.removeElementAt(j);
                     break;
 

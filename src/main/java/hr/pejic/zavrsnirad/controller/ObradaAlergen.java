@@ -33,7 +33,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-        checkNaziv();
+        checkNazivIzmjena();
     }
 
     @Override
@@ -48,12 +48,12 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
        }
     }
 
-    @Override
-     protected void checkNaziv()throws Iznimka{
+    
+     private void checkNazivIzmjena()throws Iznimka{
         super.checkNaziv();
-        List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv and sifra!=:sifra")
+        List<Alergen> lista = session.createQuery("from Alergen a where a.naziv=:naziv and sifra!=:sifra")
                 .setParameter("naziv", entitet.getNaziv()).setParameter("sifra", entitet.getId()).list();
-        if(lista.size() > 0){
+        if(!(lista.isEmpty())){
             throw new Iznimka("Alergen pod tim nazivom vec postoji");
         }
     }
@@ -61,7 +61,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
      private void checkNazivKreiraj() throws Iznimka{
          super.checkNaziv();
          List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-        if(lista.size() > 0){
+        if(!(lista.isEmpty())){
             throw new Iznimka("Alergen pod tim nazivom vec postoji");
         }
      }

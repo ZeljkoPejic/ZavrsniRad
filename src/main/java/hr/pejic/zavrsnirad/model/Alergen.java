@@ -19,10 +19,20 @@ public class Alergen extends AttributeNaziv {
         
     private String opis;
     
-    @ManyToMany(mappedBy = "alergeni")
+    @ManyToMany(mappedBy = "alergeniOsobe")
     private List<Osoba> osobe = new ArrayList<>();
     
-                  
+    @ManyToMany(mappedBy = "alergeniSastojak")
+    private List<Sastojak> sastojci = new ArrayList<>();
+
+    public List<Sastojak> getSastojci() {
+        return sastojci;
+    }
+
+    public void setSastojci(List<Sastojak> sastojci) {
+        this.sastojci = sastojci;
+    }
+                      
     public String getOpis() {
         return opis;
     }

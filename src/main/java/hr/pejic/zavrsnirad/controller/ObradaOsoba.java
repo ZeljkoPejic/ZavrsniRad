@@ -5,13 +5,13 @@
  */
 package hr.pejic.zavrsnirad.controller;
 
-import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.Oib;
 import java.util.List;
 
 /**
+ * 
  *
  * @author Pejić
  */
@@ -26,7 +26,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
         return session.createQuery("from Osoba o where concat(o.ime, ' ', o.prezime, ' ', o.oib) "
                 + " like :trazi ").setParameter("trazi", "%" + trazi + "%").list();
     }
-
+    
     public ObradaOsoba(Osoba osoba) {
         super(osoba);
     }
@@ -40,12 +40,14 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
         checkIme();
         checkPrezime();
-        checkOib();
+        checkOibKreiraj();
 
     }
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
+        checkIme();
+        checkPrezime();
         checkOibIzmjena();
         
     }
@@ -88,43 +90,40 @@ public class ObradaOsoba extends Obrada<Osoba> {
         }
     }
 
-    private void checkOib() throws Iznimka {
+    private void checkOibKreiraj() throws Iznimka {
 
-        if (entitet.getOib() == null) {
-
-        } else if (!Oib.provjeraOib(entitet.getOib())) {
-            throw new Iznimka("Neispravan unos OIB-a");
+        checkOib();
+        
+        List<String> osobeOib = session.createQuery("from Osoba o where o.oib=:oib").setParameter("oib", entitet.getOib()).list();
+        
+        if(osobeOib.size()>0){
+            throw new Iznimka("Osoba pod tim OIB-om već postoji");
         }
-        checkOibIzmjena();
         
         
     }
     
-    private void checkOibIzmjena() throws Iznimka{
-        
-        List<String> osobeOib = session.createQuery("select o.oib from Osoba o").list();
-        
-        for(String o : osobeOib){
-            if(entitet.getOib().equals(o)){
-                throw new Iznimka("Osoba pod tim OIB-om već postoji");
-            }
+    private void checkOib() throws Iznimka{
+        if(entitet.getOib()==null || entitet.getOib().trim().isEmpty()){
+            
+        }
+        if(!Oib.provjeraOib(entitet.getOib())){
+            throw new Iznimka("Neispravan unos OIB-a");
         }
     }
+   
+    private void checkOibIzmjena() throws Iznimka{
+        
+        checkOib();
+        
+        
+        
+        List<Osoba> osobe = session.createQuery("from Osoba o where o.oib=:oib and o.sifra=:sifra")
+                .setParameter("oib", entitet.getOib()).setParameter("sifra", entitet.getId()).list();
+        if(osobe.size()>0){
+            throw new Iznimka("Osoba pod tim OIB-om već postoji");
+        }  
 
-    private void checkAlergen() throws Iznimka {
-
-//        List<Alergen> lista = session.createQuery("from Alergen a where a.naziv=naziv").list();
-//        
-//        for (Alergen a : lista) {
-//
-//            if (entitet.getAlergeni().contains(a)) {
-//                throw new Iznimka("Alergen je već dodijeljen osobi");
-//            }
-//        }
-
-//       if(lista.size()>0){
-//           throw  new EdunovaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", odaberite drugi OIB");
-//       }
     }
 
 }

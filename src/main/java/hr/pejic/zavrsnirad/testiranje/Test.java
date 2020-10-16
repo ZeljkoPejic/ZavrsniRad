@@ -72,7 +72,7 @@ public class Test {
         
         new GlavniProzor().setVisible(true);
         
-        //HibernateUtility.getSessionFactory().openSession();
+      // HibernateUtility.getSessionFactory().openSession();
         
         
     }

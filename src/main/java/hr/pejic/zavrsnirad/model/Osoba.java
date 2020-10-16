@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -25,14 +27,19 @@ public class Osoba extends Entitet{
     private String oib;
     
     @ManyToMany
-    private List<Alergen> alergeni = new ArrayList<>();
+    @JoinTable(
+        name = "osoba_alergen", 
+        joinColumns = @JoinColumn(name = "osoba"), 
+        inverseJoinColumns = @JoinColumn(name = "alergen")
+    )
+    private List<Alergen> alergeniOsobe = new ArrayList<>();
 
-    public List<Alergen> getAlergeni() {
-        return alergeni;
+    public List<Alergen> getAlergeniOsobe() {
+        return alergeniOsobe;
     }
 
-    public void setAlergeni(List<Alergen> alergeni) {
-        this.alergeni = alergeni;
+    public void setAlergeniOsobe(List<Alergen> alergeniOsobe) {
+        this.alergeniOsobe = alergeniOsobe;
     }
     
 

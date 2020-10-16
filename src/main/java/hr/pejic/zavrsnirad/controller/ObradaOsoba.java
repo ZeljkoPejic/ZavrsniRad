@@ -62,6 +62,11 @@ public class ObradaOsoba extends Obrada<Osoba> {
         session.getTransaction().commit();
         
     }
+    public void obrisiAlergenOsobe() throws Iznimka{
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
+    }
 
     private void checkIme() throws Iznimka {
 

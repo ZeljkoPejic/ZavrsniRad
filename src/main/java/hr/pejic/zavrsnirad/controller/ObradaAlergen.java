@@ -27,18 +27,18 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
     
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
-       checkNaziv();
+       checkNazivKreiraj();
        checkOpis();   // Je li mi treba? Moze biti null
     }
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-        
+        checkNaziv();
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
-       
+       checkBrisanje();
     }
       
 
@@ -48,13 +48,31 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
        }
     }
 
+    @Override
      protected void checkNaziv()throws Iznimka{
         super.checkNaziv();
-        List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+        List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv and sifra!=:sifra")
+                .setParameter("naziv", entitet.getNaziv()).setParameter("sifra", entitet.getId()).list();
         if(lista.size() > 0){
             throw new Iznimka("Alergen pod tim nazivom vec postoji");
         }
     }
+     
+     private void checkNazivKreiraj() throws Iznimka{
+         super.checkNaziv();
+         List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+        if(lista.size() > 0){
+            throw new Iznimka("Alergen pod tim nazivom vec postoji");
+        }
+     }
+     
+     private void checkBrisanje() throws Iznimka{
+         
+         if(!(entitet.getOsobe().isEmpty())){
+             throw new Iznimka("<html>Nemoguće obrisati, neke osobe<br>imaju alergen "+entitet.getNaziv());
+         }
+         
+     }
    
     
     

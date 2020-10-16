@@ -33,12 +33,7 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
         
     
     protected void checkNaziv() throws Iznimka{
-        
-        //?????
-        //entitet.getNaziv();
-        
-        
-               
+                     
         if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
             throw new Iznimka("Naziv je obavezan");
         }

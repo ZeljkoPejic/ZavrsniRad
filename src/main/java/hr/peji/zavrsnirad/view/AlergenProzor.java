@@ -55,9 +55,9 @@ public class AlergenProzor extends javax.swing.JFrame {
         lblNaziv = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstAlergeni = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDodaj = new javax.swing.JButton();
+        btnIzmjena = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNaziv = new javax.swing.JTextField();
         lblIznimka = new javax.swing.JLabel();
@@ -91,24 +91,24 @@ public class AlergenProzor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lstAlergeni);
 
-        jButton1.setText("Dodaj");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDodajActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Izmjena");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnIzmjena.setText("Izmjena");
+        btnIzmjena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnIzmjenaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Obriši");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnObrisiActionPerformed(evt);
             }
         });
 
@@ -125,24 +125,28 @@ public class AlergenProzor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
-                        .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNaziv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblIznimka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnObrisi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnIzmjena))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 19, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +173,11 @@ public class AlergenProzor extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2))))
+                            .addComponent(btnDodaj)
+                            .addComponent(btnObrisi)
+                            .addComponent(btnIzmjena))))
                 .addContainerGap())
         );
 
@@ -189,20 +193,19 @@ public class AlergenProzor extends javax.swing.JFrame {
         if (alergen == null) {
             return;
         }
-        ocitiPolja();
-        if(alergen.getNaziv().length()>10){
+        ocistiPolja();
+        if (alergen.getNaziv().length() > 10) {
             txtNaziv.setText(alergen.getNaziv());
-        }else{
+        } else {
             lblNaziv.setText(alergen.getNaziv());
         }
-        
+
         txtOpis.setText(alergen.getOpis());
-        
 
 
     }//GEN-LAST:event_lstAlergeniValueChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
         alergen = new Alergen();
 
@@ -212,9 +215,9 @@ public class AlergenProzor extends javax.swing.JFrame {
         oa.setEntitet(alergen);
         try {
             oa.kreiraj();
-            lblIznimka.setText("Alergen je uspješno kreiran");
             ucitajAlergene();
-            ocitiPolja();
+            ocistiPolja();
+            lblIznimka.setText("Alergen je uspješno kreiran");            
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
@@ -222,42 +225,54 @@ public class AlergenProzor extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDodajActionPerformed
 
     private void txtTraziKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziKeyReleased
         traziAlergene();
     }//GEN-LAST:event_txtTraziKeyReleased
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
         alergen = lstAlergeni.getSelectedValue();
+        if(alergen == null){
+            lblIznimka.setText("Odaberite alergen za brisanje");
+            return;
+        }
+        
         oa.setEntitet(alergen);
         try {
             oa.obrisi();
             lblIznimka.setText("Alergen uspješno obrisan");
             ucitajAlergene();
-            ocitiPolja();
+            ocistiPolja();
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
         alergen = lstAlergeni.getSelectedValue();
+        if(alergen == null){
+            lblIznimka.setText("Odaberite alergen za izmjenu");
+            return;
+        }
+        
+        alergen.setNaziv(txtNaziv.getText());
+        alergen.setOpis(txtOpis.getText());
+        
         oa.setEntitet(alergen);
         try {
             oa.azuriraj();
-            lblIznimka.setText("Uspješna izmjena alergena");
             ucitajAlergene();
-            
+            lblIznimka.setText("Uspješna izmjena alergena");
             new BrisanjePoruke(jLabel1).start();
 
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnIzmjenaActionPerformed
 
     private void ucitajAlergene() {
 
@@ -278,13 +293,13 @@ public class AlergenProzor extends javax.swing.JFrame {
 
     }
 
-    private void ocitiPolja() {
+    private void ocistiPolja() {
         Component[] com = getRootPane().getComponents();
         JTextField jtf = new JTextField();
-        
+
         for (Component a : com) {
             if (a.getClass().isInstance(jtf)) {
-                ((JTextField)a).setText("");
+                ((JTextField) a).setText("");
             }
         }
 
@@ -296,17 +311,16 @@ public class AlergenProzor extends javax.swing.JFrame {
 //            }
 //
 //        }
-
-    txtNaziv.setText("");
-    txtOpis.setText("");
-    lblNaziv.setText("");
+        txtNaziv.setText("");
+        txtOpis.setText("");
+        lblNaziv.setText("");
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnIzmjena;
+    private javax.swing.JButton btnObrisi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

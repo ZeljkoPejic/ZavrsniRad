@@ -62,7 +62,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                              <Component id="btnPokreni" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnOdradiRadnju" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -75,10 +75,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblIkona" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTraziSastojak" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblPoruka" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblIkona" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTraziSastojak" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,7 +94,7 @@
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnPokreni" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnOdradiRadnju" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -111,6 +113,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTraziSastojak">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziSastojakKeyReleased"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
@@ -176,12 +181,12 @@
         <Property name="text" type="java.lang.String" value="Brisanje"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPokreni">
+    <Component class="javax.swing.JButton" name="btnOdradiRadnju">
       <Properties>
         <Property name="text" type="java.lang.String" value="Obrada"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPokreniActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOdradiRadnjuActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPoruka">

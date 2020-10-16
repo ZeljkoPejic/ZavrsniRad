@@ -9,6 +9,8 @@ import hr.pejic.zavrsnirad.controller.ObradaSastojak;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import hr.pejic.zavrsnirad.utility.Oib;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -26,6 +28,7 @@ public class SastojakProzor extends javax.swing.JFrame {
         initComponents();
         os = new ObradaSastojak();
         setTitle(Sastojak.class.getSimpleName());
+        ucitajSastojke();
         lblIkona.setText("\ud83d\udd0d");
         txtTraziSastojak.setToolTipText("Unesi sastojak koji želiš tražiti");
         sliderIzbor.getValue();
@@ -39,7 +42,9 @@ public class SastojakProzor extends javax.swing.JFrame {
         os.setEntitet(sastojak);
         try {
             os.kreiraj();
-            lblPoruka.setText("Sastojak " + sastojak.getNaziv() + " je uspješno kreiran");
+            ucitajSastojke();
+            lblPoruka.setText("Sastojak je uspješno kreiran");
+            Oib.ocistiPolja(rootPane);
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
             lblPoruka.setText(ex.getPoruka());
@@ -51,6 +56,17 @@ public class SastojakProzor extends javax.swing.JFrame {
         if (sastojak == null) {
             return;
         }
+        sastojak.setNaziv(txtNaziv.getText());
+        os.setEntitet(sastojak);
+        try {
+            os.azuriraj();
+            ucitajSastojke();
+            lblPoruka.setText("Sastojak " + txtNaziv.getText() + " je uspješno ažuriran u " + sastojak.getNaziv());
+            Oib.ocistiPolja(rootPane);
+            new BrisanjePoruke(lblPoruka).start();
+        }catch(Iznimka ex){
+            lblPoruka.setText(ex.getPoruka());
+        }
 
     }
 
@@ -59,6 +75,17 @@ public class SastojakProzor extends javax.swing.JFrame {
         if (sastojak == null) {
             return;
         }
+    }
+
+    private void ucitajSastojke() {
+        DefaultListModel<Sastojak> model = new DefaultListModel<>();
+        os.ispis().forEach(s -> model.addElement(s));
+        lstSastojak.setModel(model);
+    }
+    private void traziSastojke(){
+        DefaultListModel<Sastojak> model = new DefaultListModel<>();
+        os.ispis(txtTraziSastojak.getText()).forEach(s -> model.addElement(s));
+        lstSastojak.setModel(model);
     }
 
     /**
@@ -80,13 +107,19 @@ public class SastojakProzor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnPokreni = new javax.swing.JButton();
+        btnOdradiRadnju = new javax.swing.JButton();
         lblPoruka = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         lblIkona.setText("Icon");
+
+        txtTraziSastojak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTraziSastojakKeyReleased(evt);
+            }
+        });
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
 
@@ -112,10 +145,10 @@ public class SastojakProzor extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Brisanje");
 
-        btnPokreni.setText("Obrada");
-        btnPokreni.addActionListener(new java.awt.event.ActionListener() {
+        btnOdradiRadnju.setText("Obrada");
+        btnOdradiRadnju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPokreniActionPerformed(evt);
+                btnOdradiRadnjuActionPerformed(evt);
             }
         });
 
@@ -156,17 +189,18 @@ public class SastojakProzor extends javax.swing.JFrame {
                                 .addComponent(sliderIzbor, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
-                                .addComponent(btnPokreni)))
+                                .addComponent(btnOdradiRadnju)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIkona)
-                    .addComponent(txtTraziSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblIkona)
+                        .addComponent(txtTraziSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,7 +212,7 @@ public class SastojakProzor extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPokreni)))
+                        .addComponent(btnOdradiRadnju)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +235,7 @@ public class SastojakProzor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lstSastojakValueChanged
 
-    private void btnPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokreniActionPerformed
+    private void btnOdradiRadnjuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdradiRadnjuActionPerformed
 
         switch (sliderIzbor.getValue()) {
             case 0:
@@ -215,11 +249,15 @@ public class SastojakProzor extends javax.swing.JFrame {
                 break;
         }
 
-    }//GEN-LAST:event_btnPokreniActionPerformed
+    }//GEN-LAST:event_btnOdradiRadnjuActionPerformed
+
+    private void txtTraziSastojakKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziSastojakKeyReleased
+        traziSastojke();
+    }//GEN-LAST:event_txtTraziSastojakKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPokreni;
+    private javax.swing.JButton btnOdradiRadnju;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

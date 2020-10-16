@@ -19,7 +19,10 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
     public List<Sastojak> ispis() {
         return session.createQuery("from Sastojak").list();
     }
-    
+
+    public List<Sastojak> ispis(String trazi){
+        return session.createQuery("from Sastojak s where s.naziv like :trazi").setParameter("trazi", "%"+trazi+"%").list();
+    }
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
         super.checkNaziv();
@@ -28,23 +31,38 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-       super.checkNaziv();
+        super.checkNaziv();
+        checkNazivIzmjena();
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
-        
+
     }
-    
-    private void checkNazivKreiraj()throws Iznimka{
-        
+
+    private void checkNazivKreiraj() throws Iznimka {
+
         List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
         if(!(listaNaziva.isEmpty())){
             throw new Iznimka("Sastojak već postoji");
         }
+//        try{
+//            Sastojak provjeraNaziv = (Sastojak) session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).getSingleResult();
+//            if(provjeraNaziv!=null){
+//                throw new Iznimka("Sastojak već postoji");
+//            }
+//        }catch(Exception e){
+//            
+//        }
         
     }
 
-    
-           
+    private void checkNazivIzmjena() throws Iznimka {
+        List<Sastojak> lista = session.createQuery("from Sastojak s where s.naziv=:naziv and sifra=:sifra")
+                .setParameter("naziv", entitet.getNaziv()).setParameter("sifra", entitet.getId()).list();
+        if (!(lista.isEmpty())) {
+            throw new Iznimka("Sastojak već postoji");
+        }
+    }
+
 }

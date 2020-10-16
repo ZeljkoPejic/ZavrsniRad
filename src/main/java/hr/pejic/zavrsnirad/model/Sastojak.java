@@ -35,5 +35,12 @@ public class Sastojak extends AttributeNaziv{
     public void setAlergeniSastojak(List<Alergen> alergeniSastojak) {
         this.alergeniSastojak = alergeniSastojak;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+    
            
 }

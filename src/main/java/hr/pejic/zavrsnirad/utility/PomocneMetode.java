@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author Pejić
  */
-public class Oib {
+public class PomocneMetode {
 
     public static boolean provjeraOib(String oib) {
 

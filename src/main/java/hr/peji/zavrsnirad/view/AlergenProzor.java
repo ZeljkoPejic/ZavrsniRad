@@ -9,7 +9,7 @@ import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
-import hr.pejic.zavrsnirad.utility.Oib;
+import hr.pejic.zavrsnirad.utility.PomocneMetode;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
@@ -196,7 +196,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         if (alergen == null) {
             return;
         }
-        Oib.ocistiPolja(getContentPane());
+        PomocneMetode.ocistiPolja(getContentPane());
         if (alergen.getNaziv().length() > 10) {
             txtNaziv.setText(alergen.getNaziv());
         } else {
@@ -219,7 +219,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         try {
             oa.kreiraj();
             ucitajAlergene();
-            Oib.ocistiPolja(getContentPane());
+            PomocneMetode.ocistiPolja(getContentPane());
             lblIznimka.setText("Alergen je uspješno kreiran");            
             new BrisanjePoruke(lblIznimka).start();
 
@@ -246,7 +246,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             oa.obrisi();
             lblIznimka.setText("Alergen uspješno obrisan");
             ucitajAlergene();
-            Oib.ocistiPolja(getContentPane());
+            PomocneMetode.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {

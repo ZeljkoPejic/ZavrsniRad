@@ -7,7 +7,7 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
-import hr.pejic.zavrsnirad.utility.Oib;
+import hr.pejic.zavrsnirad.utility.PomocneMetode;
 import java.util.List;
 
 /**
@@ -107,7 +107,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
         if(entitet.getOib()==null || entitet.getOib().trim().isEmpty()){
             
         }
-        if(!Oib.provjeraOib(entitet.getOib())){
+        if(!PomocneMetode.provjeraOib(entitet.getOib())){
             throw new Iznimka("Neispravan unos OIB-a");
         }
     }

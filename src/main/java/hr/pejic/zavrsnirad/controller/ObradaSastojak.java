@@ -64,5 +64,12 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
             throw new Iznimka("Sastojak već postoji");
         }
     }
+    
+    public void azurirajAlergenSastojka(){
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
+        session.close();
+    }
 
 }

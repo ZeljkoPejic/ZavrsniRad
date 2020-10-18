@@ -71,6 +71,9 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
          if(!(entitet.getOsobe().isEmpty())){
              throw new Iznimka("<html>Nemoguće obrisati, neke osobe<br>imaju alergen "+entitet.getNaziv());
          }
+         if(!entitet.getSastojci().isEmpty()){
+             throw new Iznimka("<html>Nemoguće obrisati, neki sastojci<br>sadrđavaju alergen "+entitet.getNaziv());
+         }
          
      }
    

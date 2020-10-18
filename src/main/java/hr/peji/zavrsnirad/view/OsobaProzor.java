@@ -424,16 +424,16 @@ public class OsobaProzor extends javax.swing.JFrame {
 
         osoba = lstOsoba.getSelectedValue();
         if (osoba == null) {
-            lblPorukaZaAlergene.setText("Odaberite osobu za brisanje alergena");
+            lblPorukaZaAlergene.setText("Odaberite osobu za uklanjanje alergena");
             return;
         }
         DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
-        if (m == null || m.isEmpty()) {
+        if (m.isEmpty()) {
             lblPorukaZaAlergene.setText("Lista alergena osobe je prazna");
             return;
         }
         List<Alergen> selektiraniAlergeni = lstAlergeniOsobe.getSelectedValuesList();
-        if (selektiraniAlergeni == null || selektiraniAlergeni.isEmpty()) {
+        if (selektiraniAlergeni.isEmpty()) {
             lblPorukaZaAlergene.setText("Odaberite alergen/e koje želite ukloniti");
             return;
         }
@@ -453,7 +453,7 @@ public class OsobaProzor extends javax.swing.JFrame {
         }
         oo.setEntitet(osoba);
         try {
-            oo.obrisiAlergenOsobe(); // u kontroli napraviti provjeru jel vec postoje ti alergeni pod tom osobom
+            oo.obrisiAlergenOsobe();
             lblPorukaZaAlergene.setText("Osobi je uspješno obrisan alergen");
             new BrisanjePoruke(lblPorukaZaAlergene).start();
         } catch (Iznimka ex) {

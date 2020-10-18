@@ -35,9 +35,9 @@ public class SastojakProzor extends javax.swing.JFrame {
         setTitle(Sastojak.class.getSimpleName());
         ucitajSastojke();
         ucitajAlergene();
+        lstAlergenSastojka.setModel(new DefaultListModel<>());
         lblIkona.setText("\ud83d\udd0d");
         lblIkona1.setText("\ud83d\udd0d");
-        lblIkona2.setText("\ud83d\udd0d");
         txtTraziSastojak.setToolTipText("Unesi sastojak koji želiš tražiti");
 
     }
@@ -46,12 +46,11 @@ public class SastojakProzor extends javax.swing.JFrame {
         sastojak = new Sastojak();
         sastojak.setNaziv(txtNaziv.getText());
 
-        os = new ObradaSastojak();
         os.setEntitet(sastojak);
         try {
             os.kreiraj();
             ucitajSastojke();
-            lblPoruka.setText("Sastojak je uspješno kreiran");
+            lblPoruka.setText("Sastojak " + sastojak.getNaziv() + " je uspješno kreiran");
             PomocneMetode.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
@@ -62,14 +61,16 @@ public class SastojakProzor extends javax.swing.JFrame {
     private void izmjena() {
         sastojak = lstSastojak.getSelectedValue();
         if (sastojak == null) {
+            lblPoruka.setText("Odaberite sastojak za izmjenu");
             return;
         }
+        String naziv = sastojak.getNaziv();
         sastojak.setNaziv(txtNaziv.getText());
         os.setEntitet(sastojak);
         try {
             os.azuriraj();
+            lblPoruka.setText("Sastojak " + naziv + " je uspješno ažuriran u " + sastojak.getNaziv());
             ucitajSastojke();
-            lblPoruka.setText("Sastojak " + txtNaziv.getText() + " je uspješno ažuriran u " + sastojak.getNaziv());
             //PomocneMetode.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
@@ -81,6 +82,7 @@ public class SastojakProzor extends javax.swing.JFrame {
     private void obrisi() {
         sastojak = lstSastojak.getSelectedValue();
         if (sastojak == null) {
+            lblPoruka.setText("Odaberite sastojak za brisanje");
             return;
         }
         os.setEntitet(sastojak);
@@ -129,6 +131,7 @@ public class SastojakProzor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
         lblIkona = new javax.swing.JLabel();
         txtTraziSastojak = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,10 +150,8 @@ public class SastojakProzor extends javax.swing.JFrame {
         lstAlergenSastojka = new javax.swing.JList<>();
         lblIkona1 = new javax.swing.JLabel();
         txtTraziAlergenBaza = new javax.swing.JTextField();
-        lblIkona2 = new javax.swing.JLabel();
-        txtTraziAlergenSastojak = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnDodaj = new javax.swing.JButton();
+        btnUkloni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -212,22 +213,19 @@ public class SastojakProzor extends javax.swing.JFrame {
             }
         });
 
-        lblIkona2.setText("Icon");
-
-        txtTraziAlergenSastojak.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTraziAlergenSastojakKeyReleased(evt);
-            }
-        });
-
-        jButton1.setText(">>");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDodaj.setText(">>");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDodajActionPerformed(evt);
             }
         });
 
-        jButton2.setText("<<");
+        btnUkloni.setText("<<");
+        btnUkloni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUkloniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,15 +267,10 @@ public class SastojakProzor extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUkloni, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblIkona2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTraziAlergenSastojak)))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -307,14 +300,11 @@ public class SastojakProzor extends javax.swing.JFrame {
                             .addComponent(jScrollPane3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(jButton1)
+                        .addComponent(btnDodaj)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton2)))
+                        .addComponent(btnUkloni)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblIkona2)
-                        .addComponent(txtTraziAlergenSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblIkona1)
                         .addComponent(txtTraziAlergenBaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -335,6 +325,9 @@ public class SastojakProzor extends javax.swing.JFrame {
             return;
         }
         txtNaziv.setText(sastojak.getNaziv());
+        DefaultListModel<Alergen> model = new DefaultListModel<>();
+        sastojak.getAlergeniSastojak().forEach(a -> model.addElement(a));
+        lstAlergenSastojka.setModel(model);
 
 
     }//GEN-LAST:event_lstSastojakValueChanged
@@ -342,15 +335,19 @@ public class SastojakProzor extends javax.swing.JFrame {
     private void btnOdradiRadnjuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdradiRadnjuActionPerformed
 
         switch (sliderIzbor.getValue()) {
-            case 0:
+            case 0 -> {
                 kreiraj();
                 break;
-            case 1:
+            }
+            case 1 -> {
                 izmjena();
                 break;
-            case 2:
+            }
+            case 2 -> {
                 obrisi();
                 break;
+            }
+
         }
 
     }//GEN-LAST:event_btnOdradiRadnjuActionPerformed
@@ -363,17 +360,7 @@ public class SastojakProzor extends javax.swing.JFrame {
         traziAlergene();
     }//GEN-LAST:event_txtTraziAlergenBazaKeyReleased
 
-    private void txtTraziAlergenSastojakKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziAlergenSastojakKeyReleased
-        DefaultListModel<Alergen> model = new DefaultListModel<>();
-        for (Alergen a : sastojak.getAlergeniSastojak()) {
-            oa.ispis(txtTraziAlergenSastojak.getText()).forEach(s -> model.addElement(a));
-        }
-        lstAlergenSastojka.setModel(model);
-
-
-    }//GEN-LAST:event_txtTraziAlergenSastojakKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
         sastojak = lstSastojak.getSelectedValue();
         if (sastojak == null) {
@@ -381,56 +368,99 @@ public class SastojakProzor extends javax.swing.JFrame {
             return;
         }
         List<Alergen> alergeni = lstAlergeniUBazi.getSelectedValuesList();
-        if (alergeni == null) {
+        if (alergeni.isEmpty()) {
             lblPoruka.setText("Odaberite alergen koji želite dodati odabranome sastojku");
             return;
         }
-        boolean promjena = false;
-        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergenSastojka.getModel();
+        DefaultListModel<Alergen> model = new DefaultListModel<>();
 
-        nastavi:
-        for (Alergen a : alergeni) {
+//        boolean promjena = false;
+//        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergenSastojka.getModel();
+//
+//        nastavi:
+//        for (Alergen a : alergeni) {
+//
+//            for (int i = 0; i < m.size(); i++) {
+//
+//                if (a.getId().equals(m.get(i).getId())) {
+//                    //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
+//                    lblPoruka.setText("Odabrani alergen/i je/su već dodijeljen/i");
+//                    new BrisanjePoruke(lblPoruka).start();
+//                    continue nastavi;
+//                }
+//
+//            }
+//            if (m.isEmpty()) {
+//                m.addElement(a);
+//                sastojak.getAlergeniSastojak().add(a);
+//                promjena = true;
+//                continue;
+//            }
+//            m.addElement(a);
+//            sastojak.getAlergeniSastojak().add(a);
+//            promjena = true;
+//
+//        }
+        //if (promjena) {
+        try {
+            os.setEntitet(sastojak);
+            os.azurirajAlergenSastojka(alergeni);
+            sastojak.getAlergeniSastojak().forEach(a -> model.addElement(a));
+            lstAlergenSastojka.setModel(model);
+            lblPoruka.setText("Sastojku " + sastojak.getNaziv() + " uspješno je dodijeljen alergen");
+            new BrisanjePoruke(lblPoruka).start();
+        } catch (Iznimka ex) {
+            lblPoruka.setText(ex.getPoruka());
+        }
+        //}
 
-            for (int i = 0; i < m.size(); i++) {
+    }//GEN-LAST:event_btnDodajActionPerformed
 
-                if (a.getId().equals(m.get(i).getId())) {
-                    //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
-                    lblPoruka.setText("Odabrani alergen/i je/su već dodijeljen/i");
-                    new BrisanjePoruke(lblPoruka).start();
-                    continue nastavi;
+    private void btnUkloniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniActionPerformed
+
+        sastojak = lstSastojak.getSelectedValue();
+        if (sastojak == null) {
+            lblPoruka.setText("Odaberite sastojak za uklanjanje alergena");
+            return;
+        }
+
+        DefaultListModel<Alergen> alergeniSastojka = (DefaultListModel<Alergen>) lstAlergenSastojka.getModel();
+        if (alergeniSastojka.isEmpty()) {
+            lblPoruka.setText("Sastojak nema niti jedan dodijeljen alergen za obrisati");
+            return;
+        }
+        List<Alergen> selektiraniAlergeni = lstAlergenSastojka.getSelectedValuesList();
+        if (selektiraniAlergeni.isEmpty()) {
+            lblPoruka.setText("Odaberite alergen/e koje želite ukloniti");
+            return;
+        }
+        for (int i = 0; i < selektiraniAlergeni.size(); i++) {
+
+            for (int j = 0; j < alergeniSastojka.size(); j++) {
+
+                if (selektiraniAlergeni.get(i).equals(alergeniSastojka.getElementAt(j))) {
+                    sastojak.getAlergeniSastojak().remove(alergeniSastojka.getElementAt(j));
+                    alergeniSastojka.removeElementAt(j);
+                    break;
+
                 }
 
             }
-            if (m.isEmpty()) {
-                m.addElement(a);
-                sastojak.getAlergeniSastojak().add(a);
-                promjena = true;
-                continue;
-            }
-            m.addElement(a);
-            sastojak.getAlergeniSastojak().add(a);
-            promjena = true;
 
         }
-        if (promjena) {
-            os.setEntitet(sastojak);
-            
-                os.azurirajAlergenSastojka();
-                lblPoruka.setText("Sastojku "+sastojak.getNaziv()+" je uspješno dodijeljen alergen");
-                new BrisanjePoruke(lblPoruka).start();
-            
-                //lblPoruka.setText(ex.getPoruka());
-            
-        }
 
+        os.setEntitet(sastojak);
+        os.obrisiAlergenSastojka();
+        lblPoruka.setText("Sastojku " + sastojak.getNaziv() + " je uspješno obrisan alergen");
+        new BrisanjePoruke(lblPoruka).start();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnUkloniActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnOdradiRadnju;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnUkloni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -438,9 +468,9 @@ public class SastojakProzor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblIkona;
     private javax.swing.JLabel lblIkona1;
-    private javax.swing.JLabel lblIkona2;
     private javax.swing.JLabel lblPoruka;
     private javax.swing.JList<Alergen> lstAlergenSastojka;
     private javax.swing.JList<Alergen> lstAlergeniUBazi;
@@ -448,7 +478,6 @@ public class SastojakProzor extends javax.swing.JFrame {
     private javax.swing.JSlider sliderIzbor;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtTraziAlergenBaza;
-    private javax.swing.JTextField txtTraziAlergenSastojak;
     private javax.swing.JTextField txtTraziSastojak;
     // End of variables declaration//GEN-END:variables
 }

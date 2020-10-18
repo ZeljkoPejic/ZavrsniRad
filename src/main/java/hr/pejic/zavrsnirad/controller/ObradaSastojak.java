@@ -5,8 +5,10 @@
  */
 package hr.pejic.zavrsnirad.controller;
 
+import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.Iznimka;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,9 +22,10 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
         return session.createQuery("from Sastojak").list();
     }
 
-    public List<Sastojak> ispis(String trazi){
-        return session.createQuery("from Sastojak s where s.naziv like :trazi").setParameter("trazi", "%"+trazi+"%").list();
+    public List<Sastojak> ispis(String trazi) {
+        return session.createQuery("from Sastojak s where s.naziv like :trazi").setParameter("trazi", "%" + trazi + "%").list();
     }
+
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
         super.checkNaziv();
@@ -43,7 +46,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
     private void checkNazivKreiraj() throws Iznimka {
 
         List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-        if(!(listaNaziva.isEmpty())){
+        if (!(listaNaziva.isEmpty())) {
             throw new Iznimka("Sastojak već postoji");
         }
 //        try{
@@ -54,7 +57,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
 //        }catch(Exception e){
 //            
 //        }
-        
+
     }
 
     private void checkNazivIzmjena() throws Iznimka {
@@ -64,12 +67,35 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
             throw new Iznimka("Sastojak već postoji");
         }
     }
-    
-    public void azurirajAlergenSastojka(){
+
+    public void azurirajAlergenSastojka(List<Alergen> lista) throws Iznimka {
+
+        List<Alergen> pokupljeni = entitet.getAlergeniSastojak();
+        boolean promjena=false;
+        nastavi:
+        for (Alergen list : lista) {
+            for (Alergen pokup : pokupljeni) {
+                if (list.getId().equals(pokup.getId())) {
+                    continue nastavi;
+                }
+            }
+            entitet.getAlergeniSastojak().add(list);
+            promjena=true;
+
+        }
+        if(promjena){
         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
-        session.close();
+        }else{
+            throw new Iznimka("Odabrani alergeni su već unešeni");
+        }
+    }
+
+    public void obrisiAlergenSastojka() {
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
     }
 
 }

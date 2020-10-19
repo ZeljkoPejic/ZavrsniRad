@@ -6,6 +6,7 @@
 package hr.pejic.zavrsnirad.start;
 
 import hr.pejic.zavrsnirad.utility.HibernateUtility;
+import hr.pejic.zavrsnirad.view.GlavniProzor;
 
 /**
  *
@@ -13,8 +14,8 @@ import hr.pejic.zavrsnirad.utility.HibernateUtility;
  */
 public class Run {
     
-//    public static void main(String[] args) {
-//        HibernateUtility.getSessionFactory().openSession();
-//    }
+    public static void main(String[] args) {
+        new GlavniProzor().setVisible(true);
+    }
     
 }

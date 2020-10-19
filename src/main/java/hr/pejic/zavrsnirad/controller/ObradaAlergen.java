@@ -67,6 +67,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
     }
 
     private void checkBrisanje() throws Iznimka {
+        // Treba to bolje odraditi, krivo mi sto sam nekad glup
         List<Osoba> osobe = entitet.getOsobe();
         for (int i = 0; i < osobe.size(); i++) {
             List<Alergen> alergeni = osobe.get(i).getAlergeniOsobe();
@@ -76,15 +77,16 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
                 }
             }
         }
+        // Treba to bolje odraditi, krivo mi sto sam nekad glup
         List<Sastojak> sastojci = entitet.getSastojci();
         for (int i = 0; i < sastojci.size(); i++) {
             List<Alergen> alergeni = sastojci.get(i).getAlergeniSastojak();
-            for(Alergen a : alergeni){
+            for (Alergen a : alergeni) {
                 if (entitet.getId().equals(a.getId())) {
-                throw new Iznimka("<html>Nemoguće obrisati, neki sastojci<br>imaju alergen " + entitet.getNaziv());
+                    throw new Iznimka("<html>Nemoguće obrisati, neki sastojci<br>imaju alergen " + entitet.getNaziv());
+                }
             }
-            }
-            
+
         }
 
     }

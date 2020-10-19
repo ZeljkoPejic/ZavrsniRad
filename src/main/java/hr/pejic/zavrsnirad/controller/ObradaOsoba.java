@@ -79,7 +79,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
 //        session.getTransaction().commit();
         spremiEntitet();
         }else{
-            throw new Iznimka("Odabrani alergeni su već unešeni");
+            throw new Iznimka("Odabrani alergeni su već uneseni");
         }
         
     }

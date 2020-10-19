@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -28,22 +29,23 @@ public class GlavniProzor extends javax.swing.JFrame {
     public GlavniProzor() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
-        
+
         try {
+
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+
         }
         setTitle("Kuharica");
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"kuhanje.jpg").getImage().getScaledInstance(220, 282, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike" + File.separator + "kuhanje.jpg").getImage().getScaledInstance(220, 282, Image.SCALE_DEFAULT));
         lblSlika.setIcon(imageIcon);
         hyperLinks();
-        mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"osobe.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniIzlaz.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"izlaz.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniSastojak.setIcon(new ImageIcon(new ImageIcon("Slike"+File.separator+"sastojci.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "osobe.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniIzlaz.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "izlaz.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniSastojak.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "sastojci.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
     }
 
     /**
@@ -156,16 +158,14 @@ public class GlavniProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLink1MouseClicked
 
     private void lblLink2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLink2MouseClicked
-        try{
+        try {
             Desktop.getDesktop().browse(new URI("https://acaai.org/allergies/types/food-allergy"));
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Nije moguć pristup stranici");
         }
     }//GEN-LAST:event_lblLink2MouseClicked
 
     private void mniOsobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniOsobaActionPerformed
-        
-        
         new OsobaProzor().setVisible(true);
     }//GEN-LAST:event_mniOsobaActionPerformed
 

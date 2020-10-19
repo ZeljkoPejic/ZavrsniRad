@@ -6,13 +6,19 @@
 package hr.peji.zavrsnirad.view;
 
 import hr.pejic.zavrsnirad.controller.ObradaAlergen;
+import hr.pejic.zavrsnirad.controller.ObradaOsoba;
+import hr.pejic.zavrsnirad.controller.ObradaSastojak;
 import hr.pejic.zavrsnirad.model.Alergen;
+import hr.pejic.zavrsnirad.model.Osoba;
+import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.PomocneMetode;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -28,6 +34,8 @@ public class AlergenProzor extends javax.swing.JFrame {
 
     private ObradaAlergen oa;
     private Alergen alergen;
+    private Osoba osoba;
+    private Sastojak sastojak;
     private DefaultListModel<Alergen> m;
 
     /**
@@ -36,7 +44,7 @@ public class AlergenProzor extends javax.swing.JFrame {
     public AlergenProzor() {
         initComponents();
         oa = new ObradaAlergen();
-        ucitajAlergene();
+        ucitajSvePodatke();
         setTitle(Alergen.class.getSimpleName());
         setIconImage(new ImageIcon("Slike" + File.separator + "alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
@@ -64,6 +72,17 @@ public class AlergenProzor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNaziv = new javax.swing.JTextField();
         lblIznimka = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstAlergeniSastojka = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lstAlergeniOsobe = new javax.swing.JList<>();
+        cbOsoba = new javax.swing.JComboBox<>();
+        cbSastojak = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnUkloniAlergenOsobe = new javax.swing.JButton();
+        btnUkloniAlergenSastojka = new javax.swing.JButton();
+        lblPorukaZaAlergen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -119,68 +138,135 @@ public class AlergenProzor extends javax.swing.JFrame {
 
         lblIznimka.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni"));
+
+        jScrollPane3.setViewportView(lstAlergeniSastojka);
+
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni"));
+
+        jScrollPane4.setViewportView(lstAlergeniOsobe);
+
+        cbOsoba.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbOsobaItemStateChanged(evt);
+            }
+        });
+
+        cbSastojak.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSastojakItemStateChanged(evt);
+            }
+        });
+
+        jLabel4.setText("Osobe");
+
+        jLabel5.setText("Sastojci");
+
+        btnUkloniAlergenOsobe.setText("Ukloni alergen");
+        btnUkloniAlergenOsobe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUkloniAlergenOsobeActionPerformed(evt);
+            }
+        });
+
+        btnUkloniAlergenSastojka.setText("Ukloni alergen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnDodaj)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnObrisi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnIzmjena))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                                .addComponent(btnIzmjena))))
+                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUkloniAlergenOsobe)
+                    .addComponent(cbOsoba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnUkloniAlergenSastojka)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPorukaZaAlergen, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbOsoba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUkloniAlergenOsobe))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                    .addComponent(lblPorukaZaAlergen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnObrisi)
-                            .addComponent(btnIzmjena))))
+                            .addComponent(btnIzmjena)
+                            .addComponent(btnUkloniAlergenSastojka))))
                 .addContainerGap())
         );
 
@@ -220,7 +306,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             oa.kreiraj();
             ucitajAlergene();
             PomocneMetode.ocistiPolja(getContentPane());
-            lblIznimka.setText("Alergen je uspješno kreiran");            
+            lblIznimka.setText("Alergen je uspješno kreiran");
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
@@ -236,11 +322,11 @@ public class AlergenProzor extends javax.swing.JFrame {
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
         alergen = lstAlergeni.getSelectedValue();
-        if(alergen == null){
+        if (alergen == null) {
             lblIznimka.setText("Odaberite alergen za brisanje");
             return;
         }
-        String naziv = alergen.getNaziv();
+        //String naziv = alergen.getNaziv();
         oa.setEntitet(alergen);
         try {
             oa.obrisi();
@@ -257,14 +343,14 @@ public class AlergenProzor extends javax.swing.JFrame {
 
     private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
         alergen = lstAlergeni.getSelectedValue();
-        if(alergen == null){
+        if (alergen == null) {
             lblIznimka.setText("Odaberite alergen za izmjenu");
             return;
         }
-        
+
         alergen.setNaziv(txtNaziv.getText());
         alergen.setOpis(txtOpis.getText());
-        
+
         oa.setEntitet(alergen);
         try {
             oa.azuriraj();
@@ -276,6 +362,51 @@ public class AlergenProzor extends javax.swing.JFrame {
             lblIznimka.setText(ex.getPoruka());
         }
     }//GEN-LAST:event_btnIzmjenaActionPerformed
+
+    private void cbOsobaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOsobaItemStateChanged
+        osoba = (Osoba) cbOsoba.getSelectedItem();
+
+        DefaultListModel<Alergen> model = new DefaultListModel<>();
+        osoba.getAlergeniOsobe().forEach(a -> model.addElement(a));
+        lstAlergeniOsobe.setModel(model);
+
+
+    }//GEN-LAST:event_cbOsobaItemStateChanged
+
+    private void cbSastojakItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSastojakItemStateChanged
+        sastojak = (Sastojak) cbSastojak.getSelectedItem();
+        DefaultListModel<Alergen> model = new DefaultListModel<>();
+        sastojak.getAlergeniSastojak().forEach(a -> model.addElement(a));
+        lstAlergeniSastojka.setModel(model);
+    }//GEN-LAST:event_cbSastojakItemStateChanged
+
+    private void btnUkloniAlergenOsobeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniAlergenOsobeActionPerformed
+        List<Alergen> alergeni = lstAlergeniOsobe.getSelectedValuesList();
+        if(alergeni.isEmpty()){
+            lblPorukaZaAlergen.setText("<html>Odaberite alergen<br>osobe koji želite<br>ukoniti");
+            return;
+        }
+        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
+        for(Alergen a : alergeni){
+            for(int i=0;i<m.size();i++){
+                if(a.getId().equals(m.getElementAt(i).getId())){
+                    m.removeElementAt(i);
+                    break;
+                }
+            }
+        }
+        ObradaOsoba os = new ObradaOsoba();
+        os.setEntitet(osoba);
+        try{
+        os.azuriraj();
+        lblPorukaZaAlergen.setText("Uspješno uklonjen alergen osobe");
+        }catch(Iznimka ex){
+            lblPorukaZaAlergen.setText(ex.getPoruka());
+        }
+        
+        lstAlergeniOsobe.setModel(m);
+        
+    }//GEN-LAST:event_btnUkloniAlergenOsobeActionPerformed
 
     private void ucitajAlergene() {
 
@@ -296,18 +427,58 @@ public class AlergenProzor extends javax.swing.JFrame {
 
     }
 
+    private void ucitajSvePodatke() {
+
+        ucitajAlergene();
+
+        DefaultComboBoxModel<Osoba> cbo = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Sastojak> cbs = new DefaultComboBoxModel<>();
+        new ObradaOsoba().ispis().forEach(o -> cbo.addElement(o));
+        new ObradaSastojak().ispis().forEach(s -> cbs.addElement(s));
+//        if(cbo.getSize()==0){
+//            
+//        }
+//        if(cbs.getSize()==0){
+//           
+//        }
+        DefaultListModel<Alergen> lstAO = new DefaultListModel<>();
+        DefaultListModel<Alergen> lstAS = new DefaultListModel<>();
+        osoba = (Osoba) cbo.getSelectedItem();
+        sastojak = (Sastojak) cbs.getSelectedItem();
+        osoba.getAlergeniOsobe().forEach(a -> lstAO.addElement(a));
+        lstAlergeniOsobe.setModel(lstAO);
+
+        sastojak.getAlergeniSastojak().forEach(s -> lstAS.addElement(s));
+        lstAlergeniSastojka.setModel(lstAS);
+
+        cbOsoba.setModel(cbo);
+        cbSastojak.setModel(cbs);
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnIzmjena;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnUkloniAlergenOsobe;
+    private javax.swing.JButton btnUkloniAlergenSastojka;
+    private javax.swing.JComboBox<Osoba> cbOsoba;
+    private javax.swing.JComboBox<Sastojak> cbSastojak;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblIznimka;
     private javax.swing.JLabel lblNaziv;
+    private javax.swing.JLabel lblPorukaZaAlergen;
     private javax.swing.JList<Alergen> lstAlergeni;
+    private javax.swing.JList<Alergen> lstAlergeniOsobe;
+    private javax.swing.JList<Alergen> lstAlergeniSastojka;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextArea txtOpis;
     private javax.swing.JTextField txtTrazi;

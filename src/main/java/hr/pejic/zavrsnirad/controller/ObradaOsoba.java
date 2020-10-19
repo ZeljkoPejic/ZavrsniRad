@@ -5,6 +5,7 @@
  */
 package hr.pejic.zavrsnirad.controller;
 
+import hr.pejic.zavrsnirad.model.Alergen;
 import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.PomocneMetode;
@@ -57,13 +58,31 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     }
     
-    public void azurirajAlergenOsobe() throws Iznimka{
-        
+    public void azurirajAlergenOsobe(List<Alergen> lista) throws Iznimka{
+       
+        List<Alergen> pokupljeni = entitet.getAlergeniOsobe();
+        boolean promjena=false;
+        nastavi:
+        for (Alergen a : lista) {
+            for (Alergen p : pokupljeni) {
+                if (a.getId().equals(p.getId())) {
+                    continue nastavi;
+                }
+            }
+            entitet.getAlergeniOsobe().add(a);
+            promjena=true;
+
+        }
+        if(promjena){
         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
+        }else{
+            throw new Iznimka("Odabrani alergeni su već unešeni");
+        }
         
     }
+    
     public void obrisiAlergenOsobe() throws Iznimka{
         session.beginTransaction();
         session.save(entitet);
@@ -94,12 +113,10 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
         checkOib();
         
-        List<String> osobeOib = session.createQuery("from Osoba o where o.oib=:oib").setParameter("oib", entitet.getOib()).list();
-        
+        List<String> osobeOib = session.createQuery("from Osoba o where o.oib=:oib").setParameter("oib", entitet.getOib()).list();        
         if(osobeOib.size()>0){
             throw new Iznimka("Osoba pod tim OIB-om već postoji");
         }
-        
         
     }
     
@@ -114,16 +131,15 @@ public class ObradaOsoba extends Obrada<Osoba> {
    
     private void checkOibIzmjena() throws Iznimka{
         
-        checkOib();
-        
-        
-        
-        List<Osoba> osobe = session.createQuery("from Osoba o where o.oib=:oib and o.sifra=:sifra")
+        checkOib();     
+        List<Osoba> osobe = session.createQuery("from Osoba o where o.oib=:oib and sifra!=:sifra")
                 .setParameter("oib", entitet.getOib()).setParameter("sifra", entitet.getId()).list();
         if(osobe.size()>0){
             throw new Iznimka("Osoba pod tim OIB-om već postoji");
         }  
 
     }
+    
+    
 
 }

@@ -46,11 +46,12 @@ public class SastojakProzor extends javax.swing.JFrame {
         sastojak = new Sastojak();
         sastojak.setNaziv(txtNaziv.getText());
 
-        os.setEntitet(sastojak);
+        
         try {
+            os.setEntitet(sastojak);
             os.kreiraj();
-            ucitajSastojke();
             lblPoruka.setText("Sastojak " + sastojak.getNaziv() + " je uspješno kreiran");
+            ucitajSastojke();            
             PomocneMetode.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
@@ -71,7 +72,7 @@ public class SastojakProzor extends javax.swing.JFrame {
             os.azuriraj();
             lblPoruka.setText("Sastojak " + naziv + " je uspješno ažuriran u " + sastojak.getNaziv());
             ucitajSastojke();
-            //PomocneMetode.ocistiPolja(getContentPane());
+            PomocneMetode.ocistiPolja(getContentPane());
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
             lblPoruka.setText(ex.getPoruka());

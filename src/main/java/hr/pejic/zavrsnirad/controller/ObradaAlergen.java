@@ -68,7 +68,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
      
      private void checkBrisanje() throws Iznimka{
          
-         if(!(entitet.getOsobe().isEmpty())){
+         if(!entitet.getOsobe().isEmpty()){
              throw new Iznimka("<html>Nemoguće obrisati, neke osobe<br>imaju alergen "+entitet.getNaziv());
          }
          if(!entitet.getSastojci().isEmpty()){

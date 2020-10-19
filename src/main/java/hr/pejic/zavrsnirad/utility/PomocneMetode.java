@@ -7,7 +7,6 @@ package hr.pejic.zavrsnirad.utility;
 
 import java.awt.Component;
 import java.awt.Container;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /**
@@ -53,6 +52,7 @@ public class PomocneMetode {
                 ((JTextField) a).setText("");
             }
         }
+        
 
     }
 

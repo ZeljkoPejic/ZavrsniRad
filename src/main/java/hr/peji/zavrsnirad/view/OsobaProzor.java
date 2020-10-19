@@ -284,9 +284,6 @@ public class OsobaProzor extends javax.swing.JFrame {
 
     private void lstOsobaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstOsobaValueChanged
 
-        if (evt.getValueIsAdjusting()) {
-            return;
-        }
         osoba = lstOsoba.getSelectedValue();
         if (osoba == null) {
             return;
@@ -306,15 +303,13 @@ public class OsobaProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_lstOsobaValueChanged
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
-
         new OsobaKreirajProzor().setVisible(true);
-
     }//GEN-LAST:event_btnKreirajActionPerformed
 
     private void btnIzmjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmjenaActionPerformed
 
         osoba = lstOsoba.getSelectedValue();
-        if(osoba == null){
+        if (osoba == null) {
             lblIznimka.setText("Odaberite osobu za izmjenu");
             return;
         }
@@ -342,7 +337,7 @@ public class OsobaProzor extends javax.swing.JFrame {
     private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
 
         osoba = lstOsoba.getSelectedValue();
-        if(osoba == null){
+        if (osoba == null) {
             lblIznimka.setText("Odaberite osobu za brisanje");
             return;
         }
@@ -353,6 +348,7 @@ public class OsobaProzor extends javax.swing.JFrame {
             lblIznimka.setText("Osoba uspješno obrisana");
             new BrisanjePoruke(lblIznimka).start();
             ucitajOsobe();
+            lstAlergeniOsobe.setModel(new DefaultListModel<>());
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
@@ -376,47 +372,23 @@ public class OsobaProzor extends javax.swing.JFrame {
             return;
         }
         List<Alergen> alergeni = lstAlergen.getSelectedValuesList();
-        if (alergeni == null || alergeni.isEmpty()) {
+        if (alergeni.isEmpty()) {
             lblPorukaZaAlergene.setText("Molimo odaberite alergen");
             return;
-        }
-        boolean promjena = false;
-        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
+        }        
+        DefaultListModel<Alergen> model = new DefaultListModel<>();
 
-        nastavi:
-        for (Alergen a : alergeni) {
-
-            for (int i = 0; i < m.size(); i++) {
-
-                if (a.getId().equals(m.get(i).getId())) {
-                    //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
-                    lblPorukaZaAlergene.setText("Odabrani alergen/i je/su već dodijeljen/i");
-                    new BrisanjePoruke(lblPorukaZaAlergene).start();
-                    continue nastavi;
-                }
-
-            }
-            if (m.isEmpty()) {
-                m.addElement(a);
-                osoba.getAlergeniOsobe().add(a);
-                promjena = true;
-                continue;
-            }
-            m.addElement(a);
-            osoba.getAlergeniOsobe().add(a);
-            promjena = true;
-
-        }
-        if (promjena) {
+        try {
             oo.setEntitet(osoba);
-            try {
-                oo.azurirajAlergenOsobe();
-                lblPorukaZaAlergene.setText("Osobi je uspješno dodijeljen alergen");
-                new BrisanjePoruke(lblPorukaZaAlergene).start();
-            } catch (Iznimka ex) {
-                lblPorukaZaAlergene.setText(ex.getPoruka());
-            }
+            oo.azurirajAlergenOsobe(alergeni);
+            osoba.getAlergeniOsobe().forEach(a -> model.addElement(a));
+            lstAlergeniOsobe.setModel(model);
+            lblPorukaZaAlergene.setText("Osobi je uspješno dodijeljen alergen");
+            new BrisanjePoruke(lblPorukaZaAlergene).start();
+        } catch (Iznimka ex) {
+            lblPorukaZaAlergene.setText(ex.getPoruka());
         }
+
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -445,11 +417,8 @@ public class OsobaProzor extends javax.swing.JFrame {
                     osoba.getAlergeniOsobe().remove(m.getElementAt(j));
                     m.removeElementAt(j);
                     break;
-
                 }
-
             }
-
         }
         oo.setEntitet(osoba);
         try {

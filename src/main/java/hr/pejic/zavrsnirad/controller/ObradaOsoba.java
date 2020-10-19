@@ -74,19 +74,22 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
         }
         if(promjena){
-        session.beginTransaction();
-        session.save(entitet);
-        session.getTransaction().commit();
+//        session.beginTransaction();
+//        session.save(entitet);
+//        session.getTransaction().commit();
+        spremiEntitet();
         }else{
             throw new Iznimka("Odabrani alergeni su već unešeni");
         }
         
     }
     
-    public void obrisiAlergenOsobe() throws Iznimka{
-        session.beginTransaction();
-        session.save(entitet);
-        session.getTransaction().commit();
+    public void obrisiAlergenOsobe(){
+//        session.beginTransaction();
+//        session.save(entitet);
+//        session.getTransaction().commit();
+        spremiEntitet();
+        
     }
 
     private void checkIme() throws Iznimka {
@@ -122,7 +125,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
     
     private void checkOib() throws Iznimka{
         if(entitet.getOib()==null || entitet.getOib().trim().isEmpty()){
-            
+            throw new Iznimka("OIB je obavezan");
         }
         if(!PomocneMetode.provjeraOib(entitet.getOib())){
             throw new Iznimka("Neispravan unos OIB-a");

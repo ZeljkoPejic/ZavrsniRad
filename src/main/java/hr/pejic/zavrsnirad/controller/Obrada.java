@@ -69,13 +69,13 @@ public abstract class Obrada<T>{
     }
     
 
-    private void spremiEntitet() {
+    protected void spremiEntitet() {
         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
     }
     
-    private void obrisiEntitet(){
+    protected void obrisiEntitet(){
         session.beginTransaction();
         session.delete(entitet);
         session.getTransaction().commit();

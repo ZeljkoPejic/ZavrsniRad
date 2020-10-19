@@ -87,6 +87,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
+        session.close();
         }else{
             throw new Iznimka("Odabrani alergeni su već unešeni");
         }
@@ -96,6 +97,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
+        session.close();
     }
 
 }

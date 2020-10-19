@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hr.peji.zavrsnirad.view;
+package hr.pejic.zavrsnirad.view;
 
 import java.awt.Color;
 import java.awt.Cursor;

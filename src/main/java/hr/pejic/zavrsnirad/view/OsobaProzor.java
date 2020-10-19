@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hr.peji.zavrsnirad.view;
+package hr.pejic.zavrsnirad.view;
 
 import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.controller.ObradaOsoba;
@@ -12,10 +12,12 @@ import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import java.awt.Image;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -65,7 +67,7 @@ public class OsobaProzor extends javax.swing.JFrame {
         btnBrisanje = new javax.swing.JButton();
         lblIznimka = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstAlergen = new javax.swing.JList<>();
+        lstAlergeniUBazi = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstOsoba = new javax.swing.JList<>();
         txtTraziOsobu = new javax.swing.JTextField();
@@ -165,15 +167,16 @@ public class OsobaProzor extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni u bazi"));
 
-        lstAlergen.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstAlergeniUBazi.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstAlergenValueChanged(evt);
+                lstAlergeniUBaziValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstAlergen);
+        jScrollPane1.setViewportView(lstAlergeniUBazi);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Osobe"));
 
+        lstOsoba.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstOsoba.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstOsobaValueChanged(evt);
@@ -293,12 +296,22 @@ public class OsobaProzor extends javax.swing.JFrame {
         txtPrezime.setText(osoba.getPrezime());
         txtOib.setText(osoba.getOib());
 
-        DefaultListModel<Alergen> m = new DefaultListModel<>();
+        DefaultListModel<Alergen> prazniModel = new DefaultListModel<>();
+        DefaultListModel<Alergen> modelAlergena = (DefaultListModel<Alergen>) lstAlergeniUBazi.getModel();
+         
+        
         for (Alergen a : osoba.getAlergeniOsobe()) {
-            m.addElement(a);
+            for(int i=0;i<modelAlergena.size();i++){
+                if(a.getId().equals(modelAlergena.get(i).getId())){
+                    lstAlergeniUBazi.setSelectedIndex(i);
+                    break;
+                }
+            }
+            prazniModel.addElement(a);
         }
-
-        lstAlergeniOsobe.setModel(m);
+        
+        lstAlergeniUBazi.setModel(modelAlergena);
+        lstAlergeniOsobe.setModel(prazniModel);
 
     }//GEN-LAST:event_lstOsobaValueChanged
 
@@ -313,10 +326,11 @@ public class OsobaProzor extends javax.swing.JFrame {
             lblIznimka.setText("Odaberite osobu za izmjenu");
             return;
         }
-
+        
         osoba.setIme(txtIme.getText());
         osoba.setPrezime(txtPrezime.getText());
         osoba.setOib(txtOib.getText());
+                
         oo.setEntitet(osoba);
 
         try {
@@ -354,9 +368,9 @@ public class OsobaProzor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
-    private void lstAlergenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAlergenValueChanged
+    private void lstAlergeniUBaziValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAlergeniUBaziValueChanged
 
-    }//GEN-LAST:event_lstAlergenValueChanged
+    }//GEN-LAST:event_lstAlergeniUBaziValueChanged
 
     private void txtTraziAlergenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziAlergenKeyReleased
 
@@ -371,11 +385,11 @@ public class OsobaProzor extends javax.swing.JFrame {
             lblPorukaZaAlergene.setText("Odaberite osobu za dodavanje alergena");
             return;
         }
-        List<Alergen> alergeni = lstAlergen.getSelectedValuesList();
+        List<Alergen> alergeni = lstAlergeniUBazi.getSelectedValuesList();
         if (alergeni.isEmpty()) {
             lblPorukaZaAlergene.setText("Molimo odaberite alergen");
             return;
-        }        
+        }
         DefaultListModel<Alergen> model = new DefaultListModel<>();
 
         try {
@@ -421,13 +435,9 @@ public class OsobaProzor extends javax.swing.JFrame {
             }
         }
         oo.setEntitet(osoba);
-        try {
-            oo.obrisiAlergenOsobe();
-            lblPorukaZaAlergene.setText("Osobi je uspješno obrisan alergen");
-            new BrisanjePoruke(lblPorukaZaAlergene).start();
-        } catch (Iznimka ex) {
-            lblPorukaZaAlergene.setText(ex.getPoruka());
-        }
+        oo.obrisiAlergenOsobe();
+        lblPorukaZaAlergene.setText("Osobi je uspješno obrisan alergen");
+        new BrisanjePoruke(lblPorukaZaAlergene).start();
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -452,14 +462,14 @@ public class OsobaProzor extends javax.swing.JFrame {
         DefaultListModel<Alergen> m = new DefaultListModel<>();
 
         oa.ispis().forEach(a -> m.addElement(a));
-        lstAlergen.setModel(m);
+        lstAlergeniUBazi.setModel(m);
     }
 
     private void traziAlergen() {
         DefaultListModel<Alergen> m = new DefaultListModel<>();
 
         oa.ispis(txtTraziAlergen.getText()).forEach(a -> m.addElement(a));
-        lstAlergen.setModel(m);
+        lstAlergeniUBazi.setModel(m);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -479,8 +489,8 @@ public class OsobaProzor extends javax.swing.JFrame {
     private javax.swing.JLabel lblIkona1;
     private javax.swing.JLabel lblIznimka;
     private javax.swing.JLabel lblPorukaZaAlergene;
-    private javax.swing.JList<Alergen> lstAlergen;
     private javax.swing.JList<Alergen> lstAlergeniOsobe;
+    private javax.swing.JList<Alergen> lstAlergeniUBazi;
     private javax.swing.JList<Osoba> lstOsoba;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtOib;

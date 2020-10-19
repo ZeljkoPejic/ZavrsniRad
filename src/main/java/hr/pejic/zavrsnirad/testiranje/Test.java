@@ -5,7 +5,7 @@
  */
 package hr.pejic.zavrsnirad.testiranje;
 
-import hr.peji.zavrsnirad.view.GlavniProzor;
+import hr.pejic.zavrsnirad.view.GlavniProzor;
 import hr.pejic.zavrsnirad.controller.ObradaAlergen;
 import hr.pejic.zavrsnirad.controller.ObradaOsoba;
 import hr.pejic.zavrsnirad.model.Alergen;

@@ -33,8 +33,6 @@ public abstract class Obrada<T>{
         this.session = HibernateUtility.getSessionFactory().openSession();
     }
     
-    
-
     public T getEntitet() {
         return entitet;
     }

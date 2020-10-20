@@ -14,9 +14,12 @@ import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.PomocneMetode;
+import java.awt.Image;
+import java.io.File;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -40,6 +43,7 @@ public class SastojakProzor extends javax.swing.JFrame {
         lstAlergeniSastojka.setModel(new DefaultListModel<>());
         lblIkona.setText("\ud83d\udd0d");
         lblIkona1.setText("\ud83d\udd0d");
+        setIconImage(new ImageIcon("Slike" + File.separator + "sastojci.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
         txtTraziSastojak.setToolTipText("Unesi sastojak koji želiš tražiti");
 
     }

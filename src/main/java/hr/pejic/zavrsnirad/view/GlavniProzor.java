@@ -43,8 +43,7 @@ public class GlavniProzor extends javax.swing.JFrame {
         hyperLinks();
         mniOsoba.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "osobe.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
         mniAlergen.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
-        mniIzlaz.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "izlaz.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
+        mniRecept.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));        
         mniSastojak.setIcon(new ImageIcon(new ImageIcon("Slike" + File.separator + "sastojci.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT)));
     }
 
@@ -120,6 +119,11 @@ public class GlavniProzor extends javax.swing.JFrame {
         jMenu1.add(jSeparator1);
 
         mniIzlaz.setText("Izlaz");
+        mniIzlaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniIzlazActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniIzlaz);
 
         jMenuBar1.add(jMenu1);
@@ -185,6 +189,10 @@ public class GlavniProzor extends javax.swing.JFrame {
     private void mniReceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReceptActionPerformed
         new ReceptProzor().setVisible(true);
     }//GEN-LAST:event_mniReceptActionPerformed
+
+    private void mniIzlazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniIzlazActionPerformed
+        dispose();
+    }//GEN-LAST:event_mniIzlazActionPerformed
 
     private void hyperLinks() {
 

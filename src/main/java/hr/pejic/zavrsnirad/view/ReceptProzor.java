@@ -22,10 +22,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -48,6 +51,7 @@ public class ReceptProzor extends javax.swing.JFrame {
         ucitajRecepte();
         ucitajSastojke();
         lblIkona.setText("\ud83d\udd0d");
+        setIconImage(new ImageIcon("Slike" + File.separator + "recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
 
     private void ucitajRecepte() {

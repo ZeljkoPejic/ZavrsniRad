@@ -10,9 +10,10 @@ import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.PomocneMetode;
 import java.util.List;
+import org.hibernate.query.Query;
 
 /**
- * 
+ *
  *
  * @author Pejić
  */
@@ -27,7 +28,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
         return session.createQuery("from Osoba o where concat(o.ime, ' ', o.prezime, ' ', o.oib) "
                 + " like :trazi ").setParameter("trazi", "%" + trazi + "%").list();
     }
-    
+
     public ObradaOsoba(Osoba osoba) {
         super(osoba);
     }
@@ -50,18 +51,18 @@ public class ObradaOsoba extends Obrada<Osoba> {
         checkIme();
         checkPrezime();
         checkOibIzmjena();
-        
+
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
 
     }
-    
-    public void azurirajAlergenOsobe(List<Alergen> lista) throws Iznimka{
-       
+
+    public void azurirajAlergenOsobe(List<Alergen> lista) throws Iznimka {
+
         List<Alergen> pokupljeni = entitet.getAlergeniOsobe();
-        boolean promjena=false;
+        boolean promjena = false;
         nastavi:
         for (Alergen a : lista) {
             for (Alergen p : pokupljeni) {
@@ -70,26 +71,21 @@ public class ObradaOsoba extends Obrada<Osoba> {
                 }
             }
             entitet.getAlergeniOsobe().add(a);
-            promjena=true;
+            promjena = true;
 
         }
-        if(promjena){
-//        session.beginTransaction();
-//        session.save(entitet);
-//        session.getTransaction().commit();
-        spremiEntitet();
-        }else{
+        if (promjena) {
+            spremiEntitet();
+        } else {
             throw new Iznimka("Odabrani alergeni su već uneseni");
         }
-        
+
     }
-    
-    public void obrisiAlergenOsobe(){
-//        session.beginTransaction();
-//        session.delete(entitet);
-//        session.getTransaction().commit();
+
+    public void obrisiAlergenOsobe() {
+
         spremiEntitet();
-        
+
     }
 
     private void checkIme() throws Iznimka {
@@ -115,34 +111,37 @@ public class ObradaOsoba extends Obrada<Osoba> {
     private void checkOibKreiraj() throws Iznimka {
 
         checkOib();
-        
-        List<String> osobeOib = session.createQuery("from Osoba o where o.oib=:oib").setParameter("oib", entitet.getOib()).list();        
-        if(osobeOib.size()>0){
+
+        Query query = session.createQuery("select count(o) from Osoba o where o.oib=:oib")
+                .setParameter("oib", entitet.getOib());                
+        Long count = (Long) query.uniqueResult();
+        if (count != 0) {
             throw new Iznimka("Osoba pod tim OIB-om već postoji");
         }
-        
+
     }
-    
-    private void checkOib() throws Iznimka{
-        if(entitet.getOib()==null || entitet.getOib().trim().isEmpty()){
+
+    private void checkOib() throws Iznimka {
+        if (entitet.getOib() == null || entitet.getOib().trim().isEmpty()) {
             throw new Iznimka("OIB je obavezan");
         }
-        if(!PomocneMetode.provjeraOib(entitet.getOib())){
+        if (!PomocneMetode.provjeraOib(entitet.getOib())) {
             throw new Iznimka("Neispravan unos OIB-a");
         }
     }
-   
-    private void checkOibIzmjena() throws Iznimka{
-        
-        checkOib();     
-        List<Osoba> osobe = session.createQuery("from Osoba o where o.oib=:oib and sifra!=:sifra")
-                .setParameter("oib", entitet.getOib()).setParameter("sifra", entitet.getId()).list();
-        if(osobe.size()>0){
+
+    private void checkOibIzmjena() throws Iznimka {
+
+        checkOib();
+
+        Query query = session.createQuery("select count(o) from Osoba o where o.oib=:oib and sifra!=:sifra")
+                .setParameter("oib", entitet.getOib())
+                .setParameter("sifra", entitet.getId());
+        Long count = (Long) query.uniqueResult();
+        if (count != 0) {
             throw new Iznimka("Osoba pod tim OIB-om već postoji");
-        }  
+        }
 
     }
-    
-    
 
 }

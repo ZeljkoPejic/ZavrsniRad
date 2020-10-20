@@ -24,17 +24,18 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
 
     public List<Alergen> ispis(String trazi) {
         return session.createQuery("from Alergen a where a.naziv like :trazi").setParameter("trazi", "%" + trazi + "%").list();
-
     }
 
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
+        checkNaziv();
         checkNazivKreiraj();
-        checkOpis();   // Je li mi treba? Moze biti null
+        checkOpis();   
     }
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
+        checkNaziv();
         checkNazivIzmjena();
     }
 
@@ -49,47 +50,29 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
         }
     }
 
-    private void checkNazivIzmjena() throws Iznimka {
-        super.checkNaziv();
-        List<Alergen> lista = session.createQuery("from Alergen a where a.naziv=:naziv and sifra!=:sifra")
-                .setParameter("naziv", entitet.getNaziv()).setParameter("sifra", entitet.getId()).list();
-        if (!(lista.isEmpty())) {
-            throw new Iznimka("Alergen pod tim nazivom vec postoji");
-        }
-    }
-
-    private void checkNazivKreiraj() throws Iznimka {
-        super.checkNaziv();
-        List<Alergen> lista = session.createQuery("from Alergen t where t.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-        if (!(lista.isEmpty())) {
-            throw new Iznimka("Alergen pod tim nazivom vec postoji");
-        }
-    }
-
     private void checkBrisanje() throws Iznimka {
-        // Treba to bolje odraditi, krivo mi sto sam nekad glup
+        // Treba to bolje odraditi
         List<Osoba> osobe = entitet.getOsobe();
         if (osobe != null) {
             for (int i = 0; i < osobe.size(); i++) {
                 List<Alergen> alergeni = osobe.get(i).getAlergeniOsobe();
                 for (Alergen a : alergeni) {
                     if (entitet.getId().equals(a.getId())) {
-                        throw new Iznimka("<html>Nemoguće obrisati, neke osobe<br>imaju alergen " + entitet.getNaziv());
+                        throw new Iznimka("<html><p>Nemoguće obrisati, neke osobe imaju alergen " + entitet.getNaziv()+"</p></html>");
                     }
                 }
             }
         }
-        // Treba to bolje odraditi, krivo mi sto sam nekad glup
+        // Treba to bolje odraditi
         List<Sastojak> sastojci = entitet.getSastojci();
         if (sastojci != null) {
             for (int i = 0; i < sastojci.size(); i++) {
                 List<Alergen> alergeni = sastojci.get(i).getAlergeniSastojak();
                 for (Alergen a : alergeni) {
                     if (entitet.getId().equals(a.getId())) {
-                        throw new Iznimka("<html>Nemoguće obrisati, neki sastojci<br>imaju alergen " + entitet.getNaziv());
+                        throw new Iznimka("<html><p>Nemoguće obrisati, neki sastojci imaju alergen " + entitet.getNaziv()+"</p></html>");
                     }
                 }
-
             }
         }
     }

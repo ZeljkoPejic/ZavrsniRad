@@ -6,10 +6,13 @@
 package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.Alergen;
+import hr.pejic.zavrsnirad.model.Osoba;
+import hr.pejic.zavrsnirad.model.Recept;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.Iznimka;
-import java.util.Iterator;
 import java.util.List;
+import org.hibernate.query.Query;
+
 
 /**
  *
@@ -28,46 +31,19 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
 
     @Override
     protected void kontrolaKreiraj() throws Iznimka {
-        super.checkNaziv();
+        checkNaziv();
         checkNazivKreiraj();
     }
 
     @Override
     protected void kontrolaAzuriraj() throws Iznimka {
-        super.checkNaziv();
+        checkNaziv();
         checkNazivIzmjena();
     }
 
     @Override
     protected void kontrolaObrisi() throws Iznimka {
-
-    }
-
-    private void checkNazivKreiraj() throws Iznimka {
-//
-//        List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-//        if (!(listaNaziva.isEmpty())) {
-//            throw new Iznimka("Sastojak već postoji");
-//        }
-
-        // preraditi na count count == 0 ok count != 0 nije ok
-        try{
-            Sastojak provjeraNaziv = (Sastojak) session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).getSingleResult();
-            if(provjeraNaziv!=null){
-                throw new Iznimka("Sastojak već postoji");
-            }
-        }catch(javax.persistence.NoResultException ex){
-            
-        }
-
-    }
-
-    private void checkNazivIzmjena() throws Iznimka {
-        List<Sastojak> lista = session.createQuery("from Sastojak s where s.naziv=:naziv and sifra=:sifra")
-                .setParameter("naziv", entitet.getNaziv()).setParameter("sifra", entitet.getId()).list();
-        if (!(lista.isEmpty())) {
-            throw new Iznimka("Sastojak već postoji");
-        }
+        checkBrisanje();
     }
 
     public void azurirajAlergenSastojka(List<Alergen> lista) throws Iznimka {
@@ -98,8 +74,22 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
     public void obrisiAlergenSastojka() {
         session.beginTransaction();
         session.save(entitet);
-        session.getTransaction().commit();
-       
+        session.getTransaction().commit();       
+    }
+    
+    private void checkBrisanje() throws Iznimka{
+        // Treba to bolje odraditi
+        List<Recept> recepti = entitet.getReceptiSastojka();
+        if (recepti != null) {
+            for (int i = 0; i < recepti.size(); i++) {
+                List<Sastojak> sastojci = recepti.get(i).getSastojciRecepta();
+                for (Sastojak s : sastojci) {
+                    if (entitet.getId().equals(s.getId())) {
+                        throw new Iznimka("<html><p>Nemoguće obrisati, neki recepti imaju sastojak " + entitet.getNaziv()+"</p></html>");
+                    }
+                }
+            }
+        }
     }
 
 }

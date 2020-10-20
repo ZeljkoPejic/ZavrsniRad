@@ -45,7 +45,7 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
                 .setParameter("naziv", entitet.getNaziv());
         Long count = (Long)query.uniqueResult();
         if(count!=0){
-            throw new Iznimka(entitet.getClass().getSimpleName()+" pod tim nazivom već postoji");
+            throw new Iznimka("<html><p>"+entitet.getClass().getSimpleName()+" pod tim nazivom već postoji</p></html>");
         }
     }
      protected void checkNazivIzmjena() throws Iznimka {

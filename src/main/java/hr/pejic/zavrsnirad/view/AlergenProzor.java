@@ -43,8 +43,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         oa = new ObradaAlergen();
         oo = new ObradaOsoba();
         os = new ObradaSastojak();
-        ucitajSvePodatke();
-        //ucitajAlergene();
+        ucitajSvePodatke();        
         setTitle(Alergen.class.getSimpleName());
         setIconImage(new ImageIcon("Slike" + File.separator + "alergija.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
@@ -103,6 +102,7 @@ public class AlergenProzor extends javax.swing.JFrame {
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni"));
 
+        lstAlergeni.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstAlergeni.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstAlergeniValueChanged(evt);
@@ -246,7 +246,8 @@ public class AlergenProzor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,13 +256,11 @@ public class AlergenProzor extends javax.swing.JFrame {
                                 .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                                    .addComponent(lblPorukaZaAlergen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(lblPorukaZaAlergen, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnUkloniAlergenSastojka)
@@ -296,15 +295,14 @@ public class AlergenProzor extends javax.swing.JFrame {
 
         alergen.setNaziv(txtNaziv.getText());
         alergen.setOpis(txtOpis.getText());
-
         oa.setEntitet(alergen);
+        
         try {
             oa.kreiraj();
             ucitajAlergene();
             PomocneMetode.ocistiPolja(getContentPane());
             lblIznimka.setText("Alergen je uspješno kreiran");
             new BrisanjePoruke(lblIznimka).start();
-
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
@@ -323,7 +321,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             lblIznimka.setText("Odaberite alergen za brisanje");
             return;
         }
-//lblIznimka.setText(ucitaj);
+
         oa.setEntitet(alergen);
         try {
             oa.obrisi();
@@ -353,7 +351,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             oa.azuriraj();
             ucitajAlergene();
             lblIznimka.setText("Uspješna izmjena alergena");
-            new BrisanjePoruke(jLabel1).start();
+            new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
@@ -365,8 +363,6 @@ public class AlergenProzor extends javax.swing.JFrame {
         DefaultListModel<Alergen> model = new DefaultListModel<>();
         osoba.getAlergeniOsobe().forEach(a -> model.addElement(a));
         lstAlergeniOsobe.setModel(model);
-
-
     }//GEN-LAST:event_cbOsobaItemStateChanged
 
     private void cbSastojakItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSastojakItemStateChanged
@@ -424,18 +420,15 @@ public class AlergenProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUkloniAlergenSastojkaActionPerformed
 
     private void ucitajAlergene() {
-
         m = new DefaultListModel<>();
         oa.ispis().forEach(a -> m.addElement(a));
         lstAlergeni.setModel(m);
     }
 
     private void traziAlergene() {
-
         m = new DefaultListModel<>();
         oa.ispis(txtTrazi.getText()).forEach(a -> m.addElement(a));
         lstAlergeni.setModel(m);
-
     }
 
     private void ucitajSvePodatke() {

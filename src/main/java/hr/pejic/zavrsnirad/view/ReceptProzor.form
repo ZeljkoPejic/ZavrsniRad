@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="btnGrupa">
-    </Component>
-  </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -30,8 +27,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="105" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Component id="jScrollPane1" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="lblIkona" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtTraziRecept" min="-2" pref="79" max="-2" attributes="0"/>
@@ -39,37 +36,84 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNaziv" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="lblIznimka" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="txtNaziv" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                   <Component id="pnlObrada" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblIznimka" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="402" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPoruka" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblIkona1" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtTraziAlergen" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane2" min="-2" pref="110" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnUkloni" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtNaziv" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlObrada" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="lblIznimka" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTraziRecept" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblIkona" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="232" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="txtNaziv" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pnlObrada" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblIznimka" min="-2" pref="88" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTraziAlergen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblIkona1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane3" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnUkloni" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="lblPoruka" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -101,6 +145,7 @@
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
           <Events>
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstReceptiUBaziValueChanged"/>
@@ -126,87 +171,167 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnRadioIzmjena" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRadioBrisanje" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRadioKreiraj" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnObrada" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="lblKreiraj" max="32767" attributes="0"/>
+                      <Component id="lblIzmjena" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblBrisanje" max="32767" attributes="0"/>
+                      <Component id="btnObrada" alignment="0" pref="87" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnRadioKreiraj" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnRadioIzmjena" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnRadioBrisanje" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lblKreiraj" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblIzmjena" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblBrisanje" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnObrada" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="btnRadioKreiraj">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btnGrupa"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Kreiraj"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioKreiraj.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = new Recept();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.kreiraj();&#xa;    ucitajRecepte();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+recept.getNaziv()+&quot;&lt;br&gt; je uspjep&#x161;no kreiran&quot;);&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
-            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ReceptProzor_btnRadioKreiraj"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="btnRadioIzmjena">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btnGrupa"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Izmjena"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioIzmjena.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za izmjenu&quot;);&#xa;        return;&#xa;        }&#xa;        String naziv = recept.getNaziv();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.azuriraj();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;a&#x17e;uriran u &quot;+recept.getNaziv());&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="btnRadioBrisanje">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btnGrupa"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Brisanje"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioBrisanje.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za brisanje&quot;);&#xa;        return;&#xa;        }    &#xa;        String naziv = recept.getNaziv();&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.obrisi();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;obrisan&quot;);&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="btnObrada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Obrada"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObradaActionPerformed"/>
-          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnObrada.addActionListener(new ActionListener() {&#xd;&#xa;@Override&#xd;&#xa;public void actionPerformed(ActionEvent e) {&#xd;&#xa;    new Zahvalnica().setVisible(true);&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;});&#xd;&#xa;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblKreiraj">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Kreiraj"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="lblKreiraj.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));&#xa;lblKreiraj.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = new Recept();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.kreiraj();    &#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+recept.getNaziv()+&quot;&lt;br&gt; je uspjep&#x161;no kreiran&quot;);&#xa;        ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblIzmjena">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Izmjena"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="lblIzmjena.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));&#xa;lblIzmjena.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za izmjenu&quot;);&#xa;        return;&#xa;        }&#xa;        String naziv = recept.getNaziv();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.azuriraj();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;a&#x17e;uriran u &quot;+recept.getNaziv());&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBrisanje">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Brisanje"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="lblBrisanje.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));&#xa;lblBrisanje.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za brisanje&quot;);&#xa;        return;&#xa;        }    &#xa;        String naziv = recept.getNaziv();&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.obrisi();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;obrisan&quot;);&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="lblIznimka">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTraziRecept">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziReceptKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblIkona">
       <Properties>
         <Property name="text" type="java.lang.String" value="Icon"/>
       </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Sastojci u bazi"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="lstSastojciUBazi">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Sastojak&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="txtTraziAlergen">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziAlergenKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIkona1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Icon"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Sastojci recepta"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="lstSastojciRecepta">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Sastojak&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblPoruka">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDodaj">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dodaj"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnDodaj.addActionListener(new ActionListener() {&#xd;&#xa;@Override&#xd;&#xa;public void actionPerformed(ActionEvent e) {&#xd;&#xa;        recept = lstReceptiUBazi.getSelectedValue();&#xd;&#xa;        if(recept==null){&#xd;&#xa;            lblPoruka.setText(&quot;Odaberite recept&quot;);&#xd;&#xa;            return;&#xd;&#xa;        }&#xd;&#xa;        List&lt;Sastojak&gt; sastojci = lstSastojciUBazi.getSelectedValuesList();&#xd;&#xa;        if(sastojci.isEmpty()){&#xd;&#xa;            lblPoruka.setText(&quot;Odaberite sastojke koje &#x17e;elite dodijeliti receptu &quot;+recept.getNaziv());&#xd;&#xa;            return;&#xd;&#xa;        }&#xd;&#xa;        DefaultListModel&lt;Sastojak&gt; model = new DefaultListModel&lt;&gt;();&#xd;&#xa;        try{        &#xd;&#xa;            or.setEntitet(recept);&#xd;&#xa;            or.azurirajSastojakRecepta(sastojci);&#xd;&#xa;            recept.getSastojciRecepta().forEach(s -&gt; model.addElement(s));&#xd;&#xa;            lstSastojciRecepta.setModel(model);&#xd;&#xa;            lblPoruka.setText(&quot;Receptu &quot; + recept.getNaziv() + &quot; uspje&#x161;no je dodijeljen sastojak&quot;);&#xd;&#xa;            new BrisanjePoruke(lblPoruka).start();&#xd;&#xa;        }catch(Iznimka ex){&#xd;&#xa;            lblPoruka.setText(ex.getPoruka());&#xd;&#xa;        }&#xd;&#xa;       }&#xd;&#xa;});&#xd;&#xa;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUkloni">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ukloni"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnUkloni.addActionListener(new ActionListener() {&#xa;@Override&#xa;public void actionPerformed(ActionEvent e) {&#xa;    recept = lstReceptiUBazi.getSelectedValue();&#xa;        if (recept == null) {&#xa;            lblPoruka.setText(&quot;Odaberite recept za uklanjanje recepta&quot;);&#xa;            return;&#xa;        }&#xa;        DefaultListModel&lt;Sastojak&gt; sastojciRecepta = (DefaultListModel&lt;Sastojak&gt;) lstSastojciRecepta.getModel();&#xa;        if (sastojciRecepta.isEmpty()) {&#xa;            lblPoruka.setText(&quot;Recept nema niti jedan dodijeljen sastojak za obrisati&quot;);&#xa;            return;&#xa;        }&#xa;        List&lt;Sastojak&gt; selektiraniSastojci = lstSastojciRecepta.getSelectedValuesList();&#xa;        if (selektiraniSastojci.isEmpty()) {&#xa;            lblPoruka.setText(&quot;Odaberite sastojak koje &#x17e;elite ukloniti&quot;);&#xa;            return;&#xa;        }&#xa;        for (int i = 0; i &lt; selektiraniSastojci.size(); i++) {&#xa;&#xa;            for (int j = 0; j &lt; sastojciRecepta.size(); j++) {&#xa;&#xa;                if (selektiraniSastojci.get(i).equals(sastojciRecepta.getElementAt(j))) {&#xa;                    recept.getSastojciRecepta().remove(sastojciRecepta.getElementAt(j));&#xa;                    sastojciRecepta.removeElementAt(j);&#xa;                    break;&#xa;&#xa;                }&#xa;            }&#xa;        }&#xa;        or.setEntitet(recept);&#xa;        or.obrisiSastojakRecepta();&#xa;        lblPoruka.setText(&quot;Receptu &quot; + recept.getNaziv() + &quot; je uspje&#x161;no obrisan sastojak&quot;);&#xa;        new BrisanjePoruke(lblPoruka).start();&#xa;&#xa;}&#xa;});&#xa;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -12,12 +12,10 @@ import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import java.awt.Image;
-import java.awt.event.FocusListener;
 import java.io.File;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -26,9 +24,8 @@ import javax.swing.ListSelectionModel;
 public class OsobaProzor extends javax.swing.JFrame {
 
     private Osoba osoba;
-    private ObradaOsoba oo;
-    private ObradaAlergen oa;
-    //private DefaultListModel<Osoba> m;
+    private final ObradaOsoba oo;
+    private final ObradaAlergen oa;
 
     /**
      * Creates new form OsobeProzor
@@ -166,11 +163,6 @@ public class OsobaProzor extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni u bazi"));
 
-        lstAlergeniUBazi.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstAlergeniUBaziValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(lstAlergeniUBazi);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Osobe"));
@@ -256,22 +248,21 @@ public class OsobaProzor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTraziOsobu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIkona)
-                            .addComponent(txtTraziAlergen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIkona1)
-                            .addComponent(lblPorukaZaAlergene, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jScrollPane3)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTraziOsobu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblIkona)
+                                .addComponent(txtTraziAlergen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblIkona1))
+                            .addComponent(lblPorukaZaAlergene, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane3)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
                                 .addComponent(btnAdd)
@@ -297,20 +288,22 @@ public class OsobaProzor extends javax.swing.JFrame {
 
         DefaultListModel<Alergen> prazniModel = new DefaultListModel<>();
         DefaultListModel<Alergen> modelAlergena = (DefaultListModel<Alergen>) lstAlergeniUBazi.getModel();
-         
-        
+        int[] indices = new int[osoba.getAlergeniOsobe().size()];
+        int index = 0;
         for (Alergen a : osoba.getAlergeniOsobe()) {
-            for(int i=0;i<modelAlergena.size();i++){
-                if(a.getId().equals(modelAlergena.get(i).getId())){
-                    lstAlergeniUBazi.setSelectedIndex(i);
-                    //lstAlergeniUBazi.setSelectedIndices(indices);
+            for (int i = 0; i < modelAlergena.size(); i++) {
+                if (a.getId().equals(modelAlergena.getElementAt(i).getId())) {
+                    indices[index++] = i;                    
                     break;
                 }
             }
             prazniModel.addElement(a);
         }
         
+        
         lstAlergeniUBazi.setModel(modelAlergena);
+        lstAlergeniUBazi.setSelectedIndices(indices);
+
         lstAlergeniOsobe.setModel(prazniModel);
 
     }//GEN-LAST:event_lstOsobaValueChanged
@@ -326,21 +319,22 @@ public class OsobaProzor extends javax.swing.JFrame {
             lblIznimka.setText("Odaberite osobu za izmjenu");
             return;
         }
-        
         osoba.setIme(txtIme.getText());
         osoba.setPrezime(txtPrezime.getText());
         osoba.setOib(txtOib.getText());
-                
         oo.setEntitet(osoba);
 
         try {
             oo.azuriraj();
-            ucitajOsobe();
             lblIznimka.setText("Uspješna izmjena osobe");
             new BrisanjePoruke(lblIznimka).start();
         } catch (Iznimka ex) {
             lblIznimka.setText(ex.getPoruka());
         }
+        ucitajOsobe();
+        txtIme.setText("");
+        txtPrezime.setText("");
+        txtOib.setText("");
 
     }//GEN-LAST:event_btnIzmjenaActionPerformed
 
@@ -368,14 +362,8 @@ public class OsobaProzor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
-    private void lstAlergeniUBaziValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAlergeniUBaziValueChanged
-
-    }//GEN-LAST:event_lstAlergeniUBaziValueChanged
-
     private void txtTraziAlergenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziAlergenKeyReleased
-
         traziAlergen();
-
     }//GEN-LAST:event_txtTraziAlergenKeyReleased
 
 
@@ -391,9 +379,9 @@ public class OsobaProzor extends javax.swing.JFrame {
             return;
         }
         DefaultListModel<Alergen> model = new DefaultListModel<>();
+        oo.setEntitet(osoba);
 
         try {
-            oo.setEntitet(osoba);
             oo.azurirajAlergenOsobe(alergeni);
             osoba.getAlergeniOsobe().forEach(a -> model.addElement(a));
             lstAlergeniOsobe.setModel(model);
@@ -442,32 +430,25 @@ public class OsobaProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     public void ucitajOsobe() {
-
         DefaultListModel<Osoba> m = new DefaultListModel<>();
-
         oo.ispis().forEach(s -> m.addElement(s));
-
         lstOsoba.setModel(m);
-
     }
 
     private void traziOsobe() {
         DefaultListModel<Osoba> m = new DefaultListModel<>();
-
         oo.ispis(txtTraziOsobu.getText()).forEach(s -> m.addElement(s));
         lstOsoba.setModel(m);
     }
 
     private void ucitajAlergen() {
         DefaultListModel<Alergen> m = new DefaultListModel<>();
-
         oa.ispis().forEach(a -> m.addElement(a));
         lstAlergeniUBazi.setModel(m);
     }
 
     private void traziAlergen() {
         DefaultListModel<Alergen> m = new DefaultListModel<>();
-
         oa.ispis(txtTraziAlergen.getText()).forEach(a -> m.addElement(a));
         lstAlergeniUBazi.setModel(m);
     }

@@ -111,6 +111,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -121,13 +122,11 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cbSastojak" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jScrollPane3" alignment="0" pref="179" max="32767" attributes="0"/>
-                                  <Component id="lblPorukaZaAlergen" max="32767" attributes="0"/>
+                                  <Component id="lblPorukaZaAlergen" pref="184" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -198,6 +197,7 @@
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
           <Events>
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstAlergeniValueChanged"/>

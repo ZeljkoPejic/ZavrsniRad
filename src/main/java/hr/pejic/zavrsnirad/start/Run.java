@@ -5,7 +5,6 @@
  */
 package hr.pejic.zavrsnirad.start;
 
-import hr.pejic.zavrsnirad.utility.HibernateUtility;
 import hr.pejic.zavrsnirad.view.GlavniProzor;
 
 /**
@@ -14,8 +13,8 @@ import hr.pejic.zavrsnirad.view.GlavniProzor;
  */
 public class Run {
     
-//    public static void main(String[] args) {
-//        new GlavniProzor().setVisible(true);
-//    }
+    public static void main(String[] args) {
+        new GlavniProzor().setVisible(true);
+    }
     
 }

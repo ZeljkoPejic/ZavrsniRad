@@ -6,13 +6,16 @@
 package hr.pejic.zavrsnirad.view;
 
 import hr.pejic.zavrsnirad.controller.ObradaAlergen;
+import hr.pejic.zavrsnirad.controller.ObradaRecept;
 import hr.pejic.zavrsnirad.controller.ObradaSastojak;
 import hr.pejic.zavrsnirad.model.Alergen;
+import hr.pejic.zavrsnirad.model.Recept;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.BrisanjePoruke;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import hr.pejic.zavrsnirad.utility.PomocneMetode;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 /**
@@ -22,8 +25,8 @@ import javax.swing.DefaultListModel;
 public class SastojakProzor extends javax.swing.JFrame {
 
     private Sastojak sastojak;
-    private ObradaSastojak os;
-    private ObradaAlergen oa;
+    private final ObradaSastojak os;
+    private final ObradaAlergen oa;
 
     /**
      * Creates new form SastojakProzor
@@ -33,9 +36,8 @@ public class SastojakProzor extends javax.swing.JFrame {
         os = new ObradaSastojak();
         oa = new ObradaAlergen();
         setTitle(Sastojak.class.getSimpleName());
-        ucitajSastojke();
-        ucitajAlergene();
-        lstAlergenSastojka.setModel(new DefaultListModel<>());
+        ucitajSvePodatke();
+        lstAlergeniSastojka.setModel(new DefaultListModel<>());
         lblIkona.setText("\ud83d\udd0d");
         lblIkona1.setText("\ud83d\udd0d");
         txtTraziSastojak.setToolTipText("Unesi sastojak koji želiš tražiti");
@@ -121,6 +123,23 @@ public class SastojakProzor extends javax.swing.JFrame {
         oa.ispis(txtTraziAlergenBaza.getText()).forEach(a -> model.addElement(a));
         lstAlergeniUBazi.setModel(model);
     }
+    
+    private void ucitajSvePodatke(){
+        ucitajSastojke();
+        ucitajAlergene();
+        
+        DefaultComboBoxModel<Recept> cbr = new DefaultComboBoxModel<>();
+        ObradaRecept or = new ObradaRecept();
+        Recept recept;
+        or.ispis().forEach(o -> cbr.addElement(o));
+        if (cbr.getSize() != 0) {
+            DefaultListModel<Sastojak> lstSR = new DefaultListModel<>(); //listaSastojakRecept
+            recept = (Recept) cbr.getSelectedItem();
+            recept.getSastojciRecepta().forEach(a -> lstSR.addElement(a));
+            lstSastojciRecepta.setModel(lstSR);
+        }
+        cbRecept.setModel(cbr);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,7 +150,6 @@ public class SastojakProzor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane4 = new javax.swing.JScrollPane();
         lblIkona = new javax.swing.JLabel();
         txtTraziSastojak = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,11 +165,15 @@ public class SastojakProzor extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstAlergeniUBazi = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        lstAlergenSastojka = new javax.swing.JList<>();
+        lstAlergeniSastojka = new javax.swing.JList<>();
         lblIkona1 = new javax.swing.JLabel();
         txtTraziAlergenBaza = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
         btnUkloni = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lstSastojciRecepta = new javax.swing.JList<>();
+        cbRecept = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -166,6 +188,7 @@ public class SastojakProzor extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
 
+        lstSastojak.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstSastojak.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstSastojakValueChanged(evt);
@@ -203,7 +226,7 @@ public class SastojakProzor extends javax.swing.JFrame {
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergen u sastojku"));
 
-        jScrollPane3.setViewportView(lstAlergenSastojka);
+        jScrollPane3.setViewportView(lstAlergeniSastojka);
 
         lblIkona1.setText("Icon");
 
@@ -227,6 +250,18 @@ public class SastojakProzor extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
+
+        jScrollPane4.setViewportView(lstSastojciRecepta);
+
+        cbRecept.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbReceptItemStateChanged(evt);
+            }
+        });
+
+        jLabel5.setText("Recept:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,7 +278,7 @@ public class SastojakProzor extends javax.swing.JFrame {
                     .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -265,12 +300,22 @@ public class SastojakProzor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTraziAlergenBaza))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUkloni, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUkloni, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbRecept, 0, 100, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -284,8 +329,14 @@ public class SastojakProzor extends javax.swing.JFrame {
                         .addComponent(txtTraziSastojak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(btnDodaj)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnUkloni))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(sliderIzbor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,21 +348,20 @@ public class SastojakProzor extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(btnOdradiRadnju))
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(btnDodaj)
-                        .addGap(46, 46, 46)
-                        .addComponent(btnUkloni)))
+                            .addComponent(jScrollPane3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblIkona1)
                         .addComponent(txtTraziAlergenBaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbRecept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -325,9 +375,23 @@ public class SastojakProzor extends javax.swing.JFrame {
             return;
         }
         txtNaziv.setText(sastojak.getNaziv());
-        DefaultListModel<Alergen> model = new DefaultListModel<>();
-        sastojak.getAlergeniSastojak().forEach(a -> model.addElement(a));
-        lstAlergenSastojka.setModel(model);
+        DefaultListModel<Alergen> prazniModel = new DefaultListModel<>();
+        DefaultListModel<Alergen> modelAlergena = (DefaultListModel<Alergen>) lstAlergeniUBazi.getModel();
+        int[] indices = new int[sastojak.getAlergeniSastojak().size()];
+        int index = 0;
+        for (Alergen a : sastojak.getAlergeniSastojak()) {
+            for (int i = 0; i < modelAlergena.size(); i++) {
+                if (a.getId().equals(modelAlergena.getElementAt(i).getId())) {
+                    indices[index++] = i;                   
+                    break;
+                }
+            }
+            prazniModel.addElement(a);
+        }        
+        lstAlergeniUBazi.setModel(modelAlergena);
+        lstAlergeniUBazi.setSelectedIndices(indices);
+
+        lstAlergeniSastojka.setModel(prazniModel);
 
 
     }//GEN-LAST:event_lstSastojakValueChanged
@@ -376,7 +440,7 @@ public class SastojakProzor extends javax.swing.JFrame {
             os.setEntitet(sastojak);
             os.azurirajAlergenSastojka(alergeni);
             sastojak.getAlergeniSastojak().forEach(a -> model.addElement(a));
-            lstAlergenSastojka.setModel(model);
+            lstAlergeniSastojka.setModel(model);
             lblPoruka.setText("Sastojku " + sastojak.getNaziv() + " uspješno je dodijeljen alergen");
             new BrisanjePoruke(lblPoruka).start();
         } catch (Iznimka ex) {
@@ -392,13 +456,12 @@ public class SastojakProzor extends javax.swing.JFrame {
             lblPoruka.setText("Odaberite sastojak za uklanjanje alergena");
             return;
         }
-
-        DefaultListModel<Alergen> alergeniSastojka = (DefaultListModel<Alergen>) lstAlergenSastojka.getModel();
+        DefaultListModel<Alergen> alergeniSastojka = (DefaultListModel<Alergen>) lstAlergeniSastojka.getModel();
         if (alergeniSastojka.isEmpty()) {
             lblPoruka.setText("Sastojak nema niti jedan dodijeljen alergen za obrisati");
             return;
         }
-        List<Alergen> selektiraniAlergeni = lstAlergenSastojka.getSelectedValuesList();
+        List<Alergen> selektiraniAlergeni = lstAlergeniSastojka.getSelectedValuesList();
         if (selektiraniAlergeni.isEmpty()) {
             lblPoruka.setText("Odaberite alergen/e koje želite ukloniti");
             return;
@@ -413,11 +476,8 @@ public class SastojakProzor extends javax.swing.JFrame {
                     break;
 
                 }
-
             }
-
         }
-
         os.setEntitet(sastojak);
         os.obrisiAlergenSastojka();
         lblPoruka.setText("Sastojku " + sastojak.getNaziv() + " je uspješno obrisan alergen");
@@ -425,15 +485,24 @@ public class SastojakProzor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnUkloniActionPerformed
 
+    private void cbReceptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbReceptItemStateChanged
+        Recept recept = (Recept) cbRecept.getSelectedItem();        
+        DefaultListModel<Sastojak> m = new DefaultListModel<>();
+        recept.getSastojciRecepta().forEach(s -> m.addElement(s));
+        lstSastojciRecepta.setModel(m);
+    }//GEN-LAST:event_cbReceptItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnOdradiRadnju;
     private javax.swing.JButton btnUkloni;
+    private javax.swing.JComboBox<Recept> cbRecept;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -441,9 +510,10 @@ public class SastojakProzor extends javax.swing.JFrame {
     private javax.swing.JLabel lblIkona;
     private javax.swing.JLabel lblIkona1;
     private javax.swing.JLabel lblPoruka;
-    private javax.swing.JList<Alergen> lstAlergenSastojka;
+    private javax.swing.JList<Alergen> lstAlergeniSastojka;
     private javax.swing.JList<Alergen> lstAlergeniUBazi;
     private javax.swing.JList<Sastojak> lstSastojak;
+    private javax.swing.JList<Sastojak> lstSastojciRecepta;
     private javax.swing.JSlider sliderIzbor;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtTraziAlergenBaza;

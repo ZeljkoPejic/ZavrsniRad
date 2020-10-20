@@ -8,6 +8,8 @@ package hr.pejic.zavrsnirad.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -18,14 +20,26 @@ import javax.persistence.ManyToMany;
 public class Recept extends AttributeNaziv{
            
     @ManyToMany
-    private List<Sastojak> sastojci = new ArrayList<>();
+    @JoinTable(
+        name = "recept_sastojak", 
+        joinColumns = @JoinColumn(name = "recept"), 
+        inverseJoinColumns = @JoinColumn(name = "sastojak")
+    )
+    private List<Sastojak> sastojciRecepta = new ArrayList<>();
 
-    public List<Sastojak> getSastojci() {
-        return sastojci;
+    public List<Sastojak> getSastojciRecepta() {
+        return sastojciRecepta;
     }
 
-    public void setSastojci(List<Sastojak> sastojci) {
-        this.sastojci = sastojci;
+    public void setSastojciRecepta(List<Sastojak> sastojciRecepta) {
+        this.sastojciRecepta = sastojciRecepta;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+    
  
 }

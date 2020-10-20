@@ -28,6 +28,18 @@ public class Sastojak extends AttributeNaziv{
     )
     private List<Alergen> alergeniSastojak = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "sastojciRecepta")
+    private List<Recept> receptiSastojka = new ArrayList<>();
+
+    public List<Recept> getReceptiSastojka() {
+        return receptiSastojka;
+    }
+
+    public void setReceptiSastojka(List<Recept> receptiSastojka) {
+        this.receptiSastojka = receptiSastojka;
+    }
+    
+    
     public List<Alergen> getAlergeniSastojak() {
         return alergeniSastojak;
     }

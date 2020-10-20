@@ -21,7 +21,7 @@ import javax.swing.UIManager;
  */
 public class Test {
     
-  //  public static void main(String[] args) {
+    public static void main(String[] args) {
         
         
 //        Alergen a = new Alergen();
@@ -70,11 +70,11 @@ public class Test {
 //        }
 //        
         
-        //new GlavniProzor().setVisible(true);
+      new GlavniProzor().setVisible(true);
         
-      // HibernateUtility.getSessionFactory().openSession();
+     // HibernateUtility.getSessionFactory().openSession();
         
         
-  //  }
+    }
     
 }

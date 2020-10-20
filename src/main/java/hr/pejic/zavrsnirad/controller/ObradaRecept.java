@@ -17,7 +17,11 @@ public class ObradaRecept extends ObradaNaziv<Recept>{
 
     @Override
     public List<Recept> ispis() {
-        return null;
+        return session.createQuery("from Recept").list();
+    }
+    
+    public List<Recept> ispis(String trazi){
+        return session.createQuery("from Recept r where r.naziv=:naziv").setParameter("naziv", trazi).list();
     }
     
     @Override
@@ -34,6 +38,12 @@ public class ObradaRecept extends ObradaNaziv<Recept>{
     protected void kontrolaObrisi() throws Iznimka {
        
     }
+    
+    private void checkNazivKreiraj(){
+        
+        
+    }
+    
 
     
     

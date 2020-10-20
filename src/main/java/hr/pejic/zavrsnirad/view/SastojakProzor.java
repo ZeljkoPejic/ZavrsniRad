@@ -45,7 +45,6 @@ public class SastojakProzor extends javax.swing.JFrame {
     private void kreiraj() {
         sastojak = new Sastojak();
         sastojak.setNaziv(txtNaziv.getText());
-
         
         try {
             os.setEntitet(sastojak);
@@ -348,9 +347,7 @@ public class SastojakProzor extends javax.swing.JFrame {
                 obrisi();
                 break;
             }
-
         }
-
     }//GEN-LAST:event_btnOdradiRadnjuActionPerformed
 
     private void txtTraziSastojakKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziSastojakKeyReleased
@@ -375,34 +372,6 @@ public class SastojakProzor extends javax.swing.JFrame {
         }
         DefaultListModel<Alergen> model = new DefaultListModel<>();
 
-//        boolean promjena = false;
-//        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergenSastojka.getModel();
-//
-//        nastavi:
-//        for (Alergen a : alergeni) {
-//
-//            for (int i = 0; i < m.size(); i++) {
-//
-//                if (a.getId().equals(m.get(i).getId())) {
-//                    //lblPorukaPostojecegAlergena.setText("Alergen "+a.getNaziv()+" je već dodjeljen");
-//                    lblPoruka.setText("Odabrani alergen/i je/su već dodijeljen/i");
-//                    new BrisanjePoruke(lblPoruka).start();
-//                    continue nastavi;
-//                }
-//
-//            }
-//            if (m.isEmpty()) {
-//                m.addElement(a);
-//                sastojak.getAlergeniSastojak().add(a);
-//                promjena = true;
-//                continue;
-//            }
-//            m.addElement(a);
-//            sastojak.getAlergeniSastojak().add(a);
-//            promjena = true;
-//
-//        }
-        //if (promjena) {
         try {
             os.setEntitet(sastojak);
             os.azurirajAlergenSastojka(alergeni);
@@ -413,8 +382,7 @@ public class SastojakProzor extends javax.swing.JFrame {
         } catch (Iznimka ex) {
             lblPoruka.setText(ex.getPoruka());
         }
-        //}
-
+        
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnUkloniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniActionPerformed

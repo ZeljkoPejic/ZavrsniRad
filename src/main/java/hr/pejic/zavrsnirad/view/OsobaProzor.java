@@ -121,7 +121,6 @@ public class OsobaProzor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIznimka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -136,8 +135,8 @@ public class OsobaProzor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBrisanje))
                             .addComponent(btnKreiraj))
-                        .addGap(0, 5, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(lblIznimka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,6 +303,7 @@ public class OsobaProzor extends javax.swing.JFrame {
             for(int i=0;i<modelAlergena.size();i++){
                 if(a.getId().equals(modelAlergena.get(i).getId())){
                     lstAlergeniUBazi.setSelectedIndex(i);
+                    //lstAlergeniUBazi.setSelectedIndices(indices);
                     break;
                 }
             }

@@ -44,19 +44,21 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
     }
 
     private void checkNazivKreiraj() throws Iznimka {
-
-        List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
-        if (!(listaNaziva.isEmpty())) {
-            throw new Iznimka("Sastojak već postoji");
-        }
-//        try{
-//            Sastojak provjeraNaziv = (Sastojak) session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).getSingleResult();
-//            if(provjeraNaziv!=null){
-//                throw new Iznimka("Sastojak već postoji");
-//            }
-//        }catch(Exception e){
-//            
+//
+//        List<String> listaNaziva = session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).list();
+//        if (!(listaNaziva.isEmpty())) {
+//            throw new Iznimka("Sastojak već postoji");
 //        }
+
+        // preraditi na count count == 0 ok count != 0 nije ok
+        try{
+            Sastojak provjeraNaziv = (Sastojak) session.createQuery("from Sastojak s where s.naziv=:naziv").setParameter("naziv", entitet.getNaziv()).getSingleResult();
+            if(provjeraNaziv!=null){
+                throw new Iznimka("Sastojak već postoji");
+            }
+        }catch(javax.persistence.NoResultException ex){
+            
+        }
 
     }
 

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btnGrupa">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="105" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblIkona" min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtTraziRecept" min="-2" pref="79" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNaziv" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="pnlObrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIznimka" min="-2" pref="111" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="402" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNaziv" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pnlObrada" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="lblIznimka" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTraziRecept" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblIkona" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="232" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Naziv"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNaziv">
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Recepti"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="lstReceptiUBazi">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstReceptiUBaziValueChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Recept&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlObrada">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnRadioIzmjena" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRadioBrisanje" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRadioKreiraj" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnObrada" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnRadioKreiraj" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnRadioIzmjena" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnRadioBrisanje" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnObrada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="btnRadioKreiraj">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btnGrupa"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Kreiraj"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioKreiraj.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = new Recept();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.kreiraj();&#xa;    ucitajRecepte();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+recept.getNaziv()+&quot;&lt;br&gt; je uspjep&#x161;no kreiran&quot;);&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ReceptProzor_btnRadioKreiraj"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="btnRadioIzmjena">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btnGrupa"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Izmjena"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioIzmjena.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za izmjenu&quot;);&#xa;        return;&#xa;        }&#xa;        String naziv = recept.getNaziv();&#xa;  recept.setNaziv(txtNaziv.getText());&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.azuriraj();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;a&#x17e;uriran u &quot;+recept.getNaziv());&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="btnRadioBrisanje">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btnGrupa"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Brisanje"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnRadioBrisanje.addMouseListener(new MouseAdapter() {&#xa;        &#xa;@Override&#xa;public void mouseClicked(MouseEvent e) {&#xa;  super.mouseClicked(e);&#xa;  recept = lstReceptiUBazi.getSelectedValue();&#xa;        if(recept==null){&#xa;        lblIznimka.setText(&quot;&lt;html&gt;Odaberite recept&lt;br&gt;za brisanje&quot;);&#xa;        return;&#xa;        }    &#xa;        String naziv = recept.getNaziv();&#xa;  or.setEntitet(recept);&#xa;  try{&#xa;    or.obrisi();&#xa;    lblIznimka.setText(&quot;&lt;html&gt;Recept &quot;+naziv+&quot;&lt;br&gt;je uspjep&#x161;no&lt;br&gt;obrisan&quot;);&#xa;    ucitajRecepte();&#xa;    new BrisanjePoruke(lblIznimka).start();&#xa;  }catch(Iznimka ex){&#xa;        lblIznimka.setText(ex.getPoruka());&#xa;  }&#xa;        &#xa; }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnObrada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Obrada"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObradaActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblIznimka">
+      <Properties>
+        <Property name="verticalTextPosition" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTraziRecept">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIkona">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Icon"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

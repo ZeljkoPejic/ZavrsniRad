@@ -25,7 +25,7 @@ public abstract class Obrada<T>{
     protected abstract void kontrolaObrisi() throws Iznimka;
     
     public Obrada(T entitet){
-        this.session = HibernateUtility.getSessionFactory().openSession();
+        this();
         this.entitet = entitet;
     }
 

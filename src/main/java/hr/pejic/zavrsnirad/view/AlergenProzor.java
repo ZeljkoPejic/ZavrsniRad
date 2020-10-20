@@ -27,9 +27,9 @@ import javax.swing.ImageIcon;
  */
 public class AlergenProzor extends javax.swing.JFrame {
 
-    private ObradaAlergen oa;
-    private ObradaOsoba oo;
-    private ObradaSastojak os;
+    private final ObradaAlergen oa;
+    private final ObradaOsoba oo;
+    private final ObradaSastojak os;
     private Alergen alergen;
     private Osoba osoba;
     private Sastojak sastojak;
@@ -63,7 +63,6 @@ public class AlergenProzor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtOpis = new javax.swing.JTextArea();
-        lblNaziv = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstAlergeni = new javax.swing.JList<>();
         btnDodaj = new javax.swing.JButton();
@@ -101,8 +100,6 @@ public class AlergenProzor extends javax.swing.JFrame {
         txtOpis.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         txtOpis.setRows(5);
         jScrollPane1.setViewportView(txtOpis);
-
-        lblNaziv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Alergeni"));
 
@@ -181,16 +178,11 @@ public class AlergenProzor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTrazi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,10 +239,8 @@ public class AlergenProzor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addComponent(lblNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -288,20 +278,13 @@ public class AlergenProzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstAlergeniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAlergeniValueChanged
-        if (evt.getValueIsAdjusting()) {
-            return;
-        }
+       
         alergen = lstAlergeni.getSelectedValue();
         if (alergen == null) {
             return;
         }
-        PomocneMetode.ocistiPolja(getContentPane());
-        if (alergen.getNaziv().length() > 10) {
-            txtNaziv.setText(alergen.getNaziv());
-        } else {
-            lblNaziv.setText(alergen.getNaziv());
-        }
-
+        //PomocneMetode.ocistiPolja(getContentPane());
+        txtNaziv.setText(alergen.getNaziv());
         txtOpis.setText(alergen.getOpis());
 
 
@@ -334,12 +317,13 @@ public class AlergenProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTraziKeyReleased
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+
         alergen = lstAlergeni.getSelectedValue();
         if (alergen == null) {
             lblIznimka.setText("Odaberite alergen za brisanje");
             return;
         }
-        //String naziv = alergen.getNaziv();
+//lblIznimka.setText(ucitaj);
         oa.setEntitet(alergen);
         try {
             oa.obrisi();
@@ -349,7 +333,7 @@ public class AlergenProzor extends javax.swing.JFrame {
             new BrisanjePoruke(lblIznimka).start();
 
         } catch (Iznimka ex) {
-            lblIznimka.setText(ex.getPoruka());
+            lblIznimka.setText(ex.getPoruka());            
         }
 
     }//GEN-LAST:event_btnObrisiActionPerformed
@@ -399,11 +383,11 @@ public class AlergenProzor extends javax.swing.JFrame {
             lblPorukaZaAlergen.setText("<html>Odaberite alergen<br>osobe koji želite<br>ukoniti");
             return;
         }
-        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
+        DefaultListModel<Alergen> model = (DefaultListModel<Alergen>) lstAlergeniOsobe.getModel();
         for (Alergen a : alergeni) {
-            for (int i = 0; i < m.size(); i++) {
-                if (a.getId().equals(m.getElementAt(i).getId())) {
-                    m.removeElementAt(i);
+            for (int i = 0; i < model.size(); i++) {
+                if (a.getId().equals(model.getElementAt(i).getId())) {
+                    model.removeElementAt(i);
                     osoba.getAlergeniOsobe().remove(i);
                     break;
                 }
@@ -412,8 +396,9 @@ public class AlergenProzor extends javax.swing.JFrame {
         oo.setEntitet(osoba);
         oo.obrisiAlergenOsobe();
         lblPorukaZaAlergen.setText("<html>Uspješno uklonjen<br> alergen osobe");
-        lstAlergeniOsobe.setModel(m);
-
+        new BrisanjePoruke(lblPorukaZaAlergen).start();
+        lstAlergeniOsobe.setModel(model);
+        
     }//GEN-LAST:event_btnUkloniAlergenOsobeActionPerformed
 
     private void btnUkloniAlergenSastojkaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniAlergenSastojkaActionPerformed
@@ -422,11 +407,11 @@ public class AlergenProzor extends javax.swing.JFrame {
             lblPorukaZaAlergen.setText("<html>Odaberite alergen<br>osobe koji želite<br>ukoniti");
             return;
         }
-        DefaultListModel<Alergen> m = (DefaultListModel<Alergen>) lstAlergeniSastojka.getModel();
+        DefaultListModel<Alergen> model = (DefaultListModel<Alergen>) lstAlergeniSastojka.getModel();
         for (Alergen a : alergeni) {
-            for (int i = 0; i < m.size(); i++) {
-                if (a.getId().equals(m.getElementAt(i).getId())) {
-                    m.removeElementAt(i);
+            for (int i = 0; i < model.size(); i++) {
+                if (a.getId().equals(model.getElementAt(i).getId())) {
+                    model.removeElementAt(i);
                     sastojak.getAlergeniSastojak().remove(i);
                     break;
                 }
@@ -435,7 +420,7 @@ public class AlergenProzor extends javax.swing.JFrame {
         os.setEntitet(sastojak);
         os.obrisiAlergenSastojka();
         lblPorukaZaAlergen.setText("<html>Uspješno uklonjen<br> alergen osobe");
-        lstAlergeniSastojka.setModel(m);
+        lstAlergeniSastojka.setModel(model);
     }//GEN-LAST:event_btnUkloniAlergenSastojkaActionPerformed
 
     private void ucitajAlergene() {
@@ -459,15 +444,15 @@ public class AlergenProzor extends javax.swing.JFrame {
 
         DefaultComboBoxModel<Osoba> cbo = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<Sastojak> cbs = new DefaultComboBoxModel<>();
-        oo.ispis().forEach(o -> cbo.addElement(o));
-        os.ispis().forEach(s -> cbs.addElement(s));
 
+        oo.ispis().forEach(o -> cbo.addElement(o));
         if (cbo.getSize() != 0) {
             DefaultListModel<Alergen> lstAO = new DefaultListModel<>();
             osoba = (Osoba) cbo.getSelectedItem();
             osoba.getAlergeniOsobe().forEach(a -> lstAO.addElement(a));
             lstAlergeniOsobe.setModel(lstAO);
         }
+        os.ispis().forEach(s -> cbs.addElement(s));
         if (cbs.getSize() != 0) {
             DefaultListModel<Alergen> lstAS = new DefaultListModel<>();
             sastojak = (Sastojak) cbs.getSelectedItem();
@@ -497,7 +482,6 @@ public class AlergenProzor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblIznimka;
-    private javax.swing.JLabel lblNaziv;
     private javax.swing.JLabel lblPorukaZaAlergen;
     private javax.swing.JList<Alergen> lstAlergeni;
     private javax.swing.JList<Alergen> lstAlergeniOsobe;

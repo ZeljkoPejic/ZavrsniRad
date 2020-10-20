@@ -14,8 +14,8 @@ import hr.pejic.zavrsnirad.view.GlavniProzor;
  */
 public class Run {
     
-    public static void main(String[] args) {
-        new GlavniProzor().setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        new GlavniProzor().setVisible(true);
+//    }
     
 }

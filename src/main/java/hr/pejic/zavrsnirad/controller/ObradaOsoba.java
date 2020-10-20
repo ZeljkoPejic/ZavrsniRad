@@ -86,7 +86,7 @@ public class ObradaOsoba extends Obrada<Osoba> {
     
     public void obrisiAlergenOsobe(){
 //        session.beginTransaction();
-//        session.save(entitet);
+//        session.delete(entitet);
 //        session.getTransaction().commit();
         spremiEntitet();
         

@@ -9,6 +9,7 @@ import hr.pejic.zavrsnirad.model.AttributeNaziv;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -36,9 +37,26 @@ public abstract class ObradaNaziv<T extends AttributeNaziv> extends Obrada<T> {
                      
         if(entitet.getNaziv()==null || entitet.getNaziv().trim().isEmpty()){
             throw new Iznimka("Naziv je obavezan");
+        }                       
+    }
+    
+    protected void checkNazivKreiraj() throws Iznimka {
+        Query query =session.createQuery("select count(k) from "+entitet.getClass().getSimpleName()+" k where k.naziv=:naziv")
+                .setParameter("naziv", entitet.getNaziv());
+        Long count = (Long)query.uniqueResult();
+        if(count!=0){
+            throw new Iznimka(entitet.getClass().getSimpleName()+" pod tim nazivom već postoji");
         }
+    }
+     protected void checkNazivIzmjena() throws Iznimka {
         
-               
+         Query query =session.createQuery("select count(k) from "+entitet.getClass().getSimpleName()+" k where k.naziv=:naziv and sifra=:sifra")
+                 .setParameter("naziv", entitet.getNaziv())
+                 .setParameter("sifra", entitet.getId());
+         Long count = (Long) query.uniqueResult();
+         if(count!=0){
+             throw new Iznimka(entitet.getClass().getSimpleName()+" već postoji");
+         }
     }
     
 }

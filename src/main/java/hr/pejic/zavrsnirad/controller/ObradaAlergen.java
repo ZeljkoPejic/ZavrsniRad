@@ -58,7 +58,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
                 List<Alergen> alergeni = osobe.get(i).getAlergeniOsobe();
                 for (Alergen a : alergeni) {
                     if (entitet.getId().equals(a.getId())) {
-                        throw new Iznimka("<html><p>Nemoguće obrisati, neke osobe imaju alergen " + entitet.getNaziv()+"</p></html>");
+                        throw new Iznimka("Nemoguće obrisati, neke osobe imaju alergen " + entitet.getNaziv());
                     }
                 }
             }
@@ -70,7 +70,7 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
                 List<Alergen> alergeni = sastojci.get(i).getAlergeniSastojak();
                 for (Alergen a : alergeni) {
                     if (entitet.getId().equals(a.getId())) {
-                        throw new Iznimka("<html><p>Nemoguće obrisati, neki sastojci imaju alergen " + entitet.getNaziv()+"</p></html>");
+                        throw new Iznimka("Nemoguće obrisati, neki sastojci imaju alergen " + entitet.getNaziv());
                     }
                 }
             }

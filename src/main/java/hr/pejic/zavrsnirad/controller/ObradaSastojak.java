@@ -83,7 +83,7 @@ public class ObradaSastojak extends ObradaNaziv<Sastojak> {
                 List<Sastojak> sastojci = recepti.get(i).getSastojciRecepta();
                 for (Sastojak s : sastojci) {
                     if (entitet.getId().equals(s.getId())) {
-                        throw new Iznimka("<html><p>Nemoguće obrisati, neki recepti imaju sastojak " + entitet.getNaziv()+"</p></html>");
+                        throw new Iznimka("Nemoguće obrisati, neki recepti imaju sastojak " + entitet.getNaziv());
                     }
                 }
             }

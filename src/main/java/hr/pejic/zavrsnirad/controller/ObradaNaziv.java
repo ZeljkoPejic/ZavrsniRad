@@ -7,8 +7,6 @@ package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.AttributeNaziv;
 import hr.pejic.zavrsnirad.utility.Iznimka;
-import java.util.ArrayList;
-import java.util.List;
 import org.hibernate.query.Query;
 
 /**

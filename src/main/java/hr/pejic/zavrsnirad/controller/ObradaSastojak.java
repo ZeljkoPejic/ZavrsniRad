@@ -6,12 +6,10 @@
 package hr.pejic.zavrsnirad.controller;
 
 import hr.pejic.zavrsnirad.model.Alergen;
-import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.model.Recept;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import java.util.List;
-import org.hibernate.query.Query;
 
 
 /**

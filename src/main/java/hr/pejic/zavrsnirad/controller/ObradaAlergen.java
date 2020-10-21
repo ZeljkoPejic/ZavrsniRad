@@ -10,6 +10,7 @@ import hr.pejic.zavrsnirad.model.Osoba;
 import hr.pejic.zavrsnirad.model.Sastojak;
 import hr.pejic.zavrsnirad.utility.Iznimka;
 import java.util.List;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -75,6 +76,17 @@ public class ObradaAlergen extends ObradaNaziv<Alergen> {
                 }
             }
         }
+    }
+    
+    @Override
+    protected void checkNazivIzmjena() throws Iznimka{
+         Query query =session.createQuery("select count(k) from "+entitet.getClass().getSimpleName()+" k where k.naziv=:naziv and sifra!=:sifra")
+                 .setParameter("naziv", entitet.getNaziv())
+                 .setParameter("sifra", entitet.getId());
+         Long count = (Long) query.uniqueResult();
+         if(count!=0){
+             throw new Iznimka(entitet.getClass().getSimpleName()+" već postoji");
+         }
     }
 
 }

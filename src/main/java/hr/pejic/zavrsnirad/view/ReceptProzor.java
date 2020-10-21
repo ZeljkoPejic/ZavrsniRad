@@ -51,6 +51,7 @@ public class ReceptProzor extends javax.swing.JFrame {
         ucitajRecepte();
         ucitajSastojke();
         lblIkona.setText("\ud83d\udd0d");
+        lblIkona1.setText("\ud83d\udd0d");
         setIconImage(new ImageIcon("Slike" + File.separator + "recept.jpg").getImage().getScaledInstance(20, 15, Image.SCALE_AREA_AVERAGING));
     }
 

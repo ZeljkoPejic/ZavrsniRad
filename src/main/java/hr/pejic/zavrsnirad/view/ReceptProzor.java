@@ -63,19 +63,19 @@ public class ReceptProzor extends javax.swing.JFrame {
 
     private void traziRecepte() {
         DefaultListModel<Recept> m = new DefaultListModel<>();
-        or.ispis().forEach(r -> m.addElement(r));
+        or.ispis(txtTraziRecept.getText()).forEach(r -> m.addElement(r));
         lstReceptiUBazi.setModel(m);
     }
 
     private void ucitajSastojke() {
         DefaultListModel<Sastojak> m = new DefaultListModel<>();
-        os.ispis(txtTraziAlergen.getText()).forEach(s -> m.addElement(s));
+        os.ispis().forEach(s -> m.addElement(s));
         lstSastojciUBazi.setModel(m);
     }
 
     private void traziSastojke() {
         DefaultListModel<Sastojak> m = new DefaultListModel<>();
-        os.ispis().forEach(s -> m.addElement(s));
+        os.ispis(txtTraziSastojke.getText()).forEach(s -> m.addElement(s));
         lstSastojciUBazi.setModel(m);
     }
 
@@ -178,7 +178,7 @@ public class ReceptProzor extends javax.swing.JFrame {
         lblIkona = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstSastojciUBazi = new javax.swing.JList<>();
-        txtTraziAlergen = new javax.swing.JTextField();
+        txtTraziSastojke = new javax.swing.JTextField();
         lblIkona1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         lstSastojciRecepta = new javax.swing.JList<>();
@@ -322,9 +322,9 @@ public class ReceptProzor extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(lstSastojciUBazi);
 
-        txtTraziAlergen.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTraziSastojke.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTraziAlergenKeyReleased(evt);
+                txtTraziSastojkeKeyReleased(evt);
             }
         });
 
@@ -365,7 +365,7 @@ public class ReceptProzor extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblIkona1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTraziAlergen))
+                                    .addComponent(txtTraziSastojke))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
@@ -398,7 +398,7 @@ public class ReceptProzor extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTraziAlergen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTraziSastojke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblIkona1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,9 +449,9 @@ public class ReceptProzor extends javax.swing.JFrame {
         traziRecepte();
     }//GEN-LAST:event_txtTraziReceptKeyReleased
 
-    private void txtTraziAlergenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziAlergenKeyReleased
+    private void txtTraziSastojkeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziSastojkeKeyReleased
         traziSastojke();
-    }//GEN-LAST:event_txtTraziAlergenKeyReleased
+    }//GEN-LAST:event_txtTraziSastojkeKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -474,7 +474,7 @@ public class ReceptProzor extends javax.swing.JFrame {
     private javax.swing.JList<Sastojak> lstSastojciUBazi;
     private javax.swing.JPanel pnlObrada;
     private javax.swing.JTextField txtNaziv;
-    private javax.swing.JTextField txtTraziAlergen;
     private javax.swing.JTextField txtTraziRecept;
+    private javax.swing.JTextField txtTraziSastojke;
     // End of variables declaration//GEN-END:variables
 }

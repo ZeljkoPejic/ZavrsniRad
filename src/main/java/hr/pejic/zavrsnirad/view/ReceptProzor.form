@@ -50,7 +50,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblIkona1" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtTraziAlergen" max="32767" attributes="0"/>
+                                  <Component id="txtTraziSastojke" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane2" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
@@ -97,7 +97,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTraziAlergen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTraziSastojke" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblIkona1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -282,9 +282,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtTraziAlergen">
+    <Component class="javax.swing.JTextField" name="txtTraziSastojke">
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziAlergenKeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziSastojkeKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblIkona1">
